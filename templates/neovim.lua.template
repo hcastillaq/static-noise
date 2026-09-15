@@ -1,0 +1,48 @@
+-- ==============================================================================
+-- Static Noise — Palette Table for Neovim
+-- Generated automatically from static-noise/palette.json
+-- ==============================================================================
+
+local palette = {
+  void = "{{colors.base.void}}",
+  surface = "{{colors.base.surface}}",
+  card = "{{colors.base.card}}",
+  card_hover = "{{colors.base.cardHover}}",
+  border = "{{colors.base.border}}",
+  border_focus = "{{colors.base.borderFocus}}",
+  selection = "{{colors.base.selection}}",
+
+  foreground = "{{colors.text.foreground}}",
+  muted = "{{colors.text.muted}}",
+  dim = "{{colors.text.dim}}",
+
+  cyan = "{{colors.accents.cyan}}",
+  blue = "{{colors.accents.blue}}",
+  purple = "{{colors.accents.purple}}",
+  magenta = "{{colors.accents.magenta}}",
+  green = "{{colors.accents.green}}",
+  yellow = "{{colors.accents.yellow}}",
+  orange = "{{colors.accents.orange}}",
+  red = "{{colors.accents.red}}",
+
+  ansi = {
+    black = "{{ansi.black}}",
+    red = "{{ansi.red}}",
+    green = "{{ansi.green}}",
+    yellow = "{{ansi.yellow}}",
+    blue = "{{ansi.blue}}",
+    magenta = "{{ansi.magenta}}",
+    cyan = "{{ansi.cyan}}",
+    white = "{{ansi.white}}",
+    bright_black = "{{ansi.brightBlack}}",
+    bright_red = "{{ansi.brightRed}}",
+    bright_green = "{{ansi.brightGreen}}",
+    bright_yellow = "{{ansi.brightYellow}}",
+    bright_blue = "{{ansi.brightBlue}}",
+    bright_magenta = "{{ansi.brightMagenta}}",
+    bright_cyan = "{{ansi.brightCyan}}",
+    bright_white = "{{ansi.brightWhite}}",
+  }
+}
+
+return palette

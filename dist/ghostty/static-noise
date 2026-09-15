@@ -1,0 +1,27 @@
+# ==============================================================================
+# Ghostty — Static Noise Theme
+# Generated automatically from static-noise/palette.json
+# ==============================================================================
+
+background = #141720
+foreground = #E6E2D6
+selection-background = #3D4460
+selection-foreground = #E6E2D6
+cursor-color = #72EAD5
+
+palette = 0=#141720
+palette = 1=#EF7785
+palette = 2=#A3D98B
+palette = 3=#EDD071
+palette = 4=#83BFFF
+palette = 5=#C2A7FF
+palette = 6=#72EAD5
+palette = 7=#E6E2D6
+palette = 8=#62697B
+palette = 9=#EF7785
+palette = 10=#A3D98B
+palette = 11=#EDD071
+palette = 12=#83BFFF
+palette = 13=#F08BC2
+palette = 14=#72EAD5
+palette = 15=#FFFFFF

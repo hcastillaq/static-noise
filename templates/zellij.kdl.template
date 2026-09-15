@@ -1,0 +1,20 @@
+// ==============================================================================
+// Zellij — Static Noise Palette Definition
+// Generated automatically from static-noise/palette.json
+// ==============================================================================
+
+themes {
+    static-noise {
+        fg "{{colors.text.foreground}}"
+        bg "{{colors.base.surface}}"
+        black "{{ansi.black}}"
+        red "{{ansi.red}}"
+        green "{{ansi.green}}"
+        yellow "{{ansi.yellow}}"
+        blue "{{ansi.blue}}"
+        magenta "{{ansi.magenta}}"
+        cyan "{{ansi.cyan}}"
+        white "{{ansi.white}}"
+        orange "{{colors.accents.orange}}"
+    }
+}

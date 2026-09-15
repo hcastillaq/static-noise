@@ -1,0 +1,112 @@
+{
+  "name": "Static Noise",
+  "type": "dark",
+  "semanticHighlighting": true,
+  "colors": {
+    "editor.background": "{{colors.base.surface}}",
+    "editor.foreground": "{{colors.text.foreground}}",
+    "editor.lineHighlightBackground": "{{colors.base.card}}",
+    "editor.selectionBackground": "{{colors.base.selection}}",
+    "editorCursor.foreground": "{{colors.accents.cyan}}",
+    "editorWhitespace.foreground": "{{colors.text.dim}}",
+    "editorIndentGuide.background": "{{colors.base.border}}",
+    "editorIndentGuide.activeBackground": "{{colors.base.borderFocus}}",
+
+    "activityBar.background": "{{colors.base.void}}",
+    "activityBar.foreground": "{{colors.accents.cyan}}",
+    "activityBar.inactiveForeground": "{{colors.text.dim}}",
+    "activityBar.border": "{{colors.base.border}}",
+
+    "sideBar.background": "{{colors.base.void}}",
+    "sideBar.foreground": "{{colors.text.muted}}",
+    "sideBar.border": "{{colors.base.border}}",
+    "sideBarTitle.foreground": "{{colors.text.foreground}}",
+    "sideBarSectionHeader.background": "{{colors.base.surface}}",
+    "sideBarSectionHeader.foreground": "{{colors.text.foreground}}",
+
+    "statusBar.background": "{{colors.base.void}}",
+    "statusBar.foreground": "{{colors.text.muted}}",
+    "statusBar.border": "{{colors.base.border}}",
+    "statusBar.debuggingBackground": "{{colors.accents.orange}}",
+    "statusBar.noFolderBackground": "{{colors.base.void}}",
+
+    "titleBar.activeBackground": "{{colors.base.void}}",
+    "titleBar.activeForeground": "{{colors.text.foreground}}",
+    "titleBar.inactiveBackground": "{{colors.base.void}}",
+    "titleBar.inactiveForeground": "{{colors.text.dim}}",
+    "titleBar.border": "{{colors.base.border}}",
+
+    "tab.activeBackground": "{{colors.base.surface}}",
+    "tab.activeForeground": "{{colors.accents.cyan}}",
+    "tab.activeBorder": "{{colors.accents.cyan}}",
+    "tab.inactiveBackground": "{{colors.base.void}}",
+    "tab.inactiveForeground": "{{colors.text.muted}}",
+    "tab.border": "{{colors.base.border}}",
+
+    "terminal.background": "{{colors.base.surface}}",
+    "terminal.foreground": "{{colors.text.foreground}}",
+    "terminal.ansiBlack": "{{ansi.black}}",
+    "terminal.ansiRed": "{{ansi.red}}",
+    "terminal.ansiGreen": "{{ansi.green}}",
+    "terminal.ansiYellow": "{{ansi.yellow}}",
+    "terminal.ansiBlue": "{{ansi.blue}}",
+    "terminal.ansiMagenta": "{{ansi.magenta}}",
+    "terminal.ansiCyan": "{{ansi.cyan}}",
+    "terminal.ansiWhite": "{{ansi.white}}",
+    "terminal.ansiBrightBlack": "{{ansi.brightBlack}}",
+    "terminal.ansiBrightRed": "{{ansi.brightRed}}",
+    "terminal.ansiBrightGreen": "{{ansi.brightGreen}}",
+    "terminal.ansiBrightYellow": "{{ansi.brightYellow}}",
+    "terminal.ansiBrightBlue": "{{ansi.brightBlue}}",
+    "terminal.ansiBrightMagenta": "{{ansi.brightMagenta}}",
+    "terminal.ansiBrightCyan": "{{ansi.brightCyan}}",
+    "terminal.ansiBrightWhite": "{{ansi.brightWhite}}"
+  },
+  "tokenColors": [
+    {
+      "name": "Comment",
+      "scope": ["comment", "punctuation.definition.comment"],
+      "settings": { "foreground": "{{colors.text.dim}}", "fontStyle": "italic" }
+    },
+    {
+      "name": "Keywords",
+      "scope": ["keyword", "storage.type", "storage.modifier"],
+      "settings": { "foreground": "{{colors.accents.purple}}" }
+    },
+    {
+      "name": "Functions",
+      "scope": ["entity.name.function", "support.function"],
+      "settings": { "foreground": "{{colors.accents.blue}}" }
+    },
+    {
+      "name": "Strings",
+      "scope": ["string", "punctuation.definition.string"],
+      "settings": { "foreground": "{{colors.accents.green}}" }
+    },
+    {
+      "name": "Variables",
+      "scope": ["variable", "variable.other"],
+      "settings": { "foreground": "{{colors.text.foreground}}" }
+    },
+    {
+      "name": "Types / Classes",
+      "scope": ["entity.name.type", "entity.name.class", "support.type"],
+      "settings": { "foreground": "{{colors.accents.yellow}}" }
+    },
+    {
+      "name": "Constants / Numbers",
+      "scope": ["constant.numeric", "constant.language", "constant.character"],
+      "settings": { "foreground": "{{colors.accents.orange}}" }
+    },
+    {
+      "name": "Tags (HTML/JSX)",
+      "scope": ["entity.name.tag"],
+      "settings": { "foreground": "{{colors.accents.cyan}}" }
+    },
+    {
+      "name": "Attributes",
+      "scope": ["entity.other.attribute-name"],
+      "settings": { "foreground": "{{colors.accents.blue}}" }
+    }
+  ]
+}

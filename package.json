@@ -1,0 +1,21 @@
+{
+  "name": "@hcastillaq/static-noise",
+  "version": "1.0.0",
+  "description": "High-contrast dark design system and multi-target palette compiler",
+  "main": "dist/palette.min.json",
+  "scripts": {
+    "build": "node src/build.js"
+  },
+  "keywords": [
+    "theme",
+    "design-system",
+    "color-palette",
+    "dark-theme",
+    "ghostty",
+    "zellij",
+    "neovim",
+    "vscode"
+  ],
+  "author": "Hernan Castilla <hcastillaq@gmail.com>",
+  "license": "MIT"
+}
