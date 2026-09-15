@@ -23,3 +23,9 @@ gui:
       - '{{colors.accents.red}}'
     defaultFgColor:
       - '{{colors.text.foreground}}'
+  showIcons: true
+  nerdFontsVersion: "3"
+git:
+  diffRenderers:
+    - colorArg: always
+      command: delta --dark --paging=never --line-numbers

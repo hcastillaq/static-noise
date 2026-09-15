@@ -23,3 +23,9 @@ gui:
       - '#EF7785'
     defaultFgColor:
       - '#E6E2D6'
+  showIcons: true
+  nerdFontsVersion: "3"
+git:
+  diffRenderers:
+    - colorArg: always
+      command: delta --dark --paging=never --line-numbers
