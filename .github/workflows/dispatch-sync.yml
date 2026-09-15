@@ -1,0 +1,39 @@
+name: Dispatch consumer synchronization
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        env:
+          SYNC_TOKEN: ${{ secrets.STATIC_NOISE_SYNC_TOKEN }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            if (!process.env.SYNC_TOKEN) {
+              core.notice('STATIC_NOISE_SYNC_TOKEN is not configured; skipping consumer dispatch during bootstrap.');
+              return;
+            }
+            const tag = context.ref.replace('refs/tags/', '');
+            const payload = {
+              tag,
+              sha: context.sha,
+              version: tag.replace(/^v/, ''),
+              bootstrap: tag === 'v0.0.1',
+            };
+            const githubWithSyncToken = github.getOctokit(process.env.SYNC_TOKEN);
+            for (const repo of ['static-noise.vscode', 'static-noise.nvim']) {
+              await githubWithSyncToken.rest.repos.createDispatchEvent({
+                owner: context.repo.owner,
+                repo,
+                event_type: 'static-noise-release',
+                client_payload: payload,
+              });
+            }
