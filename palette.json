@@ -27,6 +27,16 @@
       "yellow": "#EDD071",
       "orange": "#F3A261",
       "red": "#EF7785"
+    },
+    "dim": {
+      "cyan": "#193C3B",
+      "blue": "#20344D",
+      "purple": "#332B4D",
+      "magenta": "#48283D",
+      "green": "#293B2C",
+      "yellow": "#443B25",
+      "orange": "#493124",
+      "red": "#48262E"
     }
   },
   "ansi": {
