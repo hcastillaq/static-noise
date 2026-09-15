@@ -1,0 +1,36 @@
+# Static Noise colors for Fish and fzf
+# Generated from palette.json. Do not edit generated output manually.
+
+set -g FZF_DEFAULT_OPTS " \
+--color=bg+={{colors.dim.cyan}},bg={{colors.base.surface}},spinner={{colors.accents.red}},hl={{colors.accents.magenta}} \
+--color=fg={{colors.text.foreground}},header={{colors.accents.blue}},info={{colors.accents.blue}},pointer={{colors.accents.cyan}} \
+--color=marker={{colors.accents.green}},fg+={{colors.text.foreground}},prompt={{colors.accents.cyan}},hl+={{colors.accents.cyan}}"
+
+set -g fish_color_command {{colors.accents.cyan}}
+set -g fish_color_keyword {{colors.accents.magenta}} --bold
+set -g fish_color_quote {{colors.accents.green}}
+set -g fish_color_redirection {{colors.accents.blue}}
+set -g fish_color_end {{colors.accents.orange}}
+set -g fish_color_error {{colors.accents.red}} --bold
+set -g fish_color_normal {{colors.text.foreground}}
+set -g fish_color_param {{colors.text.foreground}}
+set -g fish_color_option {{colors.accents.purple}}
+set -g fish_color_comment {{colors.text.muted}}
+set -g fish_color_autosuggestion {{colors.text.dim}}
+set -g fish_color_operator {{colors.accents.cyan}}
+set -g fish_color_escape {{colors.accents.blue}}
+set -g fish_color_selection --background={{colors.dim.cyan}}
+set -g fish_color_search_match --background={{colors.dim.yellow}}
+set -g fish_color_cancel {{colors.accents.red}} --reverse
+set -g fish_color_cwd {{colors.accents.blue}}
+set -g fish_color_user {{colors.accents.cyan}}
+set -g fish_color_host {{colors.accents.green}}
+set -g fish_pager_color_prefix {{colors.accents.cyan}} --bold
+set -g fish_pager_color_completion {{colors.text.foreground}}
+set -g fish_pager_color_description {{colors.text.muted}}
+set -g fish_pager_color_progress {{colors.accents.blue}} --bold
+set -g fish_pager_color_selected_background --background={{colors.dim.cyan}}
+set -g fish_pager_color_selected_prefix {{colors.accents.cyan}} --bold
+set -g fish_pager_color_selected_completion {{colors.text.foreground}} --bold
+set -g fish_pager_color_selected_description {{colors.text.soft}}
+set -g fish_pager_color_secondary_background --background={{colors.base.card}}

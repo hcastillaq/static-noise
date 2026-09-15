@@ -1,0 +1,14 @@
+# Static Noise colors for git-delta
+# Generated from palette.json. Include this file from gitconfig.
+
+[delta]
+syntax-theme = ansi
+minus-style = syntax "{{colors.diff.removedEmphasis}}"
+minus-emph-style = syntax "{{colors.diff.removedEmphasis}}"
+plus-style = syntax "{{colors.diff.added}}"
+plus-emph-style = syntax "{{colors.diff.addedEmphasis}}"
+line-numbers-minus-style = "{{colors.accents.red}}"
+line-numbers-plus-style = "{{colors.accents.green}}"
+line-numbers-left-style = "{{colors.text.muted}}"
+line-numbers-right-style = "{{colors.text.muted}}"
+line-numbers-zero-style = "{{colors.text.dim}}"

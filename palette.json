@@ -15,6 +15,7 @@
     },
     "text": {
       "foreground": "#E6E2D6",
+      "soft": "#C9C8C2",
       "muted": "#9299AE",
       "dim": "#62697B"
     },
@@ -37,6 +38,12 @@
       "yellow": "#443B25",
       "orange": "#493124",
       "red": "#48262E"
+    },
+    "diff": {
+      "added": "#293B2C",
+      "addedEmphasis": "#3A5C3E",
+      "removed": "#48262E",
+      "removedEmphasis": "#6B2B38"
     }
   },
   "ansi": {

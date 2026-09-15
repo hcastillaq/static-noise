@@ -62,6 +62,32 @@ const targets = [
   {
     template: 'vscode.json.template',
     output: path.join(DIST_DIR, 'vscode', 'static-noise-color-theme.json'),
+    format: 'json',
+  },
+  {
+    template: 'fish-colors.template',
+    output: path.join(DIST_DIR, 'fish', 'static-noise-colors.fish'),
+  },
+  {
+    template: 'starship-palette.template',
+    output: path.join(DIST_DIR, 'starship', 'static-noise-palette.toml'),
+  },
+  {
+    template: 'bottom-colors.template',
+    output: path.join(DIST_DIR, 'bottom', 'static-noise-colors.toml'),
+  },
+  {
+    template: 'lazygit-theme.template',
+    output: path.join(DIST_DIR, 'lazygit', 'static-noise-theme.yml'),
+  },
+  {
+    template: 'delta-theme.template',
+    output: path.join(DIST_DIR, 'delta', 'static-noise.gitconfig'),
+  },
+  {
+    template: 'pi-theme.json.template',
+    output: path.join(DIST_DIR, 'pi', 'static-noise-theme.json'),
+    format: 'json',
   },
 ];
 
@@ -73,6 +99,13 @@ for (const target of targets) {
   }
   const content = fs.readFileSync(templatePath, 'utf-8');
   const rendered = renderTemplate(content, palette);
+
+  if (rendered.includes('{{')) {
+    throw new Error(`Unresolved token in ${target.template}`);
+  }
+  if (target.format === 'json') {
+    JSON.parse(rendered);
+  }
 
   ensureDir(path.dirname(target.output));
   fs.writeFileSync(target.output, rendered, 'utf-8');

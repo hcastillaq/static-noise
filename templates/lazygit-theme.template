@@ -1,0 +1,25 @@
+# Static Noise theme for lazygit
+# Generated from palette.json. Do not edit generated output manually.
+
+gui:
+  theme:
+    activeBorderColor:
+      - '{{colors.accents.cyan}}'
+      - bold
+    inactiveBorderColor:
+      - '{{colors.base.border}}'
+    searchingActiveBorderColor:
+      - '{{colors.accents.orange}}'
+      - bold
+    optionsTextColor:
+      - '{{colors.accents.cyan}}'
+    selectedLineBgColor:
+      - '{{colors.dim.cyan}}'
+    cherryPickedCommitBgColor:
+      - '{{colors.dim.purple}}'
+    cherryPickedCommitFgColor:
+      - '{{colors.accents.cyan}}'
+    unstagedChangesColor:
+      - '{{colors.accents.red}}'
+    defaultFgColor:
+      - '{{colors.text.foreground}}'

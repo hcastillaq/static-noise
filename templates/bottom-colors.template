@@ -1,0 +1,23 @@
+# Static Noise colors for bottom
+# Generated from palette.json. Do not edit generated output manually.
+
+[colors]
+table_header_color = "{{colors.accents.cyan}}"
+all_cpu_color = "{{colors.accents.purple}}"
+avg_cpu_color = "{{colors.accents.red}}"
+cpu_core_colors = ["{{colors.accents.cyan}}", "{{colors.accents.blue}}", "{{colors.accents.green}}", "{{colors.accents.yellow}}", "{{colors.accents.orange}}", "{{colors.accents.purple}}"]
+ram_color = "{{colors.accents.green}}"
+swap_color = "{{colors.accents.orange}}"
+rx_color = "{{colors.accents.cyan}}"
+tx_color = "{{colors.accents.purple}}"
+widget_title_color = "{{colors.accents.cyan}}"
+border_color = "{{colors.base.border}}"
+highlighted_border_color = "{{colors.accents.cyan}}"
+text_color = "{{colors.text.foreground}}"
+graph_color = "{{colors.text.dim}}"
+cursor_color = "{{colors.accents.cyan}}"
+selected_text_color = "{{colors.text.foreground}}"
+selected_bg_color = "{{colors.dim.cyan}}"
+high_battery_color = "{{colors.accents.green}}"
+medium_battery_color = "{{colors.accents.yellow}}"
+low_battery_color = "{{colors.accents.red}}"
