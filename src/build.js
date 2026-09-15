@@ -56,6 +56,10 @@ const targets = [
     output: path.join(DIST_DIR, 'zellij', 'static-noise.kdl'),
   },
   {
+    template: 'zellij-layout.kdl.template',
+    output: path.join(DIST_DIR, 'zellij', 'layouts', 'default.kdl'),
+  },
+  {
     template: 'neovim.lua.template',
     output: path.join(DIST_DIR, 'neovim', 'palette.lua'),
   },
@@ -71,6 +75,10 @@ const targets = [
   {
     template: 'starship-palette.template',
     output: path.join(DIST_DIR, 'starship', 'static-noise-palette.toml'),
+  },
+  {
+    template: 'starship.toml.template',
+    output: path.join(DIST_DIR, 'starship', 'starship.toml'),
   },
   {
     template: 'bottom-colors.template',

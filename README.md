@@ -47,11 +47,12 @@ npm run build
 
 ### Targets Generados:
 * **Ghostty:** `dist/ghostty/static-noise`
-* **Zellij:** `dist/zellij/static-noise.kdl`
+* **Zellij:** `dist/zellij/static-noise.kdl` y `dist/zellij/layouts/default.kdl`
 * **Neovim:** `dist/neovim/palette.lua`
 * **VS Code:** `dist/vscode/static-noise-color-theme.json`
 * **Fish/FZF:** `dist/fish/static-noise-colors.fish`
-* **Starship:** `dist/starship/static-noise-palette.toml`
+* **Starship:** `dist/starship/starship.toml` (completo)
+* **Starship palette:** `dist/starship/static-noise-palette.toml`
 * **Bottom:** `dist/bottom/static-noise-colors.toml`
 * **Lazygit:** `dist/lazygit/static-noise-theme.yml`
 * **Git Delta:** `dist/delta/static-noise.gitconfig`

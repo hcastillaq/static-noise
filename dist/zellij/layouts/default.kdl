@@ -1,0 +1,43 @@
+// Generated from palette.json. Do not edit generated output manually.
+layout {
+    pane
+    pane size=1 borderless=true {
+        plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+            // Layout general
+            format_left   "{mode} {tabs}"
+            format_right  "#[bg=#1A1E2B,fg=#72EAD5,bold]  {session} #[bg=#222738,fg=#E6E2D6]  {datetime} "
+            format_space  " "
+
+            format_hide_on_overlength "true"
+            format_precedence "lrc"
+
+            border_enabled  "false"
+
+            // Modos con estilo Static Noise (Cian foco para normal, semántica de estados)
+            mode_normal        "#[bg=#72EAD5,fg=#0F1117,bold]  NORMAL #[bg=default,fg=default]"
+            mode_locked        "#[bg=#EF7785,fg=#0F1117,bold]  LOCKED #[bg=default,fg=default]"
+            mode_pane          "#[bg=#83BFFF,fg=#0F1117,bold]  PANE #[bg=#222738,fg=#83BFFF]  #[fg=#72EAD5,bold]n#[fg=#E6E2D6]:new #[fg=#72EAD5,bold]d#[fg=#E6E2D6]:down #[fg=#72EAD5,bold]r#[fg=#E6E2D6]:right #[fg=#EF7785,bold]x#[fg=#E6E2D6]:close #[fg=#EDD071,bold]f#[fg=#E6E2D6]:full #[fg=#C2A7FF,bold]w#[fg=#E6E2D6]:float #[fg=#83BFFF,bold]z#[fg=#E6E2D6]:frames #[bg=default,fg=default]"
+            mode_tab           "#[bg=#C2A7FF,fg=#0F1117,bold]  TAB #[bg=#222738,fg=#C2A7FF]  #[fg=#72EAD5,bold]n#[fg=#E6E2D6]:new #[fg=#EF7785,bold]x#[fg=#E6E2D6]:close #[fg=#72EAD5,bold]h/l#[fg=#E6E2D6]:move #[fg=#EDD071,bold]r#[fg=#E6E2D6]:rename #[fg=#A3D98B,bold]s#[fg=#E6E2D6]:sync #[bg=default,fg=default]"
+            mode_resize        "#[bg=#F3A261,fg=#0F1117,bold]  RESIZE #[bg=#222738,fg=#F3A261]  #[fg=#72EAD5,bold]+/-#[fg=#E6E2D6]:size #[fg=#72EAD5,bold]h/j/k/l#[fg=#E6E2D6]:dir #[bg=default,fg=default]"
+            mode_scroll        "#[bg=#A3D98B,fg=#0F1117,bold]  SCROLL #[bg=#222738,fg=#A3D98B]  #[fg=#72EAD5,bold]j/k#[fg=#E6E2D6]:scroll #[fg=#72EAD5,bold]d/u#[fg=#E6E2D6]:page #[fg=#EDD071,bold]s#[fg=#E6E2D6]:search #[fg=#A3D98B,bold]e#[fg=#E6E2D6]:edit #[bg=default,fg=default]"
+            mode_session       "#[bg=#F08BC2,fg=#0F1117,bold]  SESSION #[bg=#222738,fg=#F08BC2]  #[fg=#EF7785,bold]d#[fg=#E6E2D6]:detach #[fg=#72EAD5,bold]w#[fg=#E6E2D6]:manager #[bg=default,fg=default]"
+            mode_move          "#[bg=#EDD071,fg=#0F1117,bold]  MOVE #[bg=#222738,fg=#EDD071]  #[fg=#72EAD5,bold]h/j/k/l#[fg=#E6E2D6]:move pane #[bg=default,fg=default]"
+            mode_search        "#[bg=#A3D98B,fg=#0F1117,bold]  SEARCH #[bg=#222738,fg=#A3D98B]  #[fg=#72EAD5,bold]n/p#[fg=#E6E2D6]:next/prev #[fg=#EDD071,bold]c#[fg=#E6E2D6]:case #[fg=#A3D98B,bold]w#[fg=#E6E2D6]:wrap #[bg=default,fg=default]"
+            mode_tmux          "#[bg=#F3A261,fg=#0F1117,bold]  TMUX #[bg=default,fg=default]"
+
+            // Pestañas (con píldora cian/cyanDim para la activa)
+            tab_normal              "#[bg=#1A1E2B,fg=#9299AE] {index} #[bg=#222738,fg=#C9C8C2] {name} #[bg=default,fg=default] "
+            tab_normal_fullscreen   "#[bg=#1A1E2B,fg=#9299AE] {index} #[bg=#222738,fg=#C9C8C2] {name} #[fg=#C2A7FF] #[bg=default,fg=default] "
+            tab_normal_sync         "#[bg=#1A1E2B,fg=#9299AE] {index} #[bg=#222738,fg=#C9C8C2] {name} #[fg=#A3D98B] #[bg=default,fg=default] "
+            
+            tab_active              "#[bg=#193C3B,fg=#E6E2D6,bold] {index} #[bg=#72EAD5,fg=#0F1117,bold] {name} #[bg=default,fg=default] "
+            tab_active_fullscreen   "#[bg=#193C3B,fg=#E6E2D6,bold] {index} #[bg=#C2A7FF,fg=#0F1117,bold] {name}  #[bg=default,fg=default] "
+            tab_active_sync         "#[bg=#193C3B,fg=#E6E2D6,bold] {index} #[bg=#A3D98B,fg=#0F1117,bold] {name}  #[bg=default,fg=default] "
+
+            // Hora
+            datetime          "#[fg=#E6E2D6,bold]{format}"
+            datetime_format   "%H:%M"
+            datetime_timezone "local"
+        }
+    }
+}
