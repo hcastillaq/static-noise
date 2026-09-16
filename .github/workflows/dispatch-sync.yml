@@ -28,7 +28,8 @@ jobs:
               version: tag.replace(/^v/, ''),
               bootstrap: tag === 'v0.0.1',
             };
-            const githubWithSyncToken = github.getOctokit(process.env.SYNC_TOKEN);
+            const { getOctokit } = require('@actions/github');
+            const githubWithSyncToken = getOctokit(process.env.SYNC_TOKEN);
             for (const repo of ['static-noise.vscode', 'static-noise.nvim']) {
               await githubWithSyncToken.rest.repos.createDispatchEvent({
                 owner: context.repo.owner,
