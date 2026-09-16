@@ -8,6 +8,8 @@ gui:
       - bold
     inactiveBorderColor:
       - '{{colors.base.border}}'
+    searchingInactiveBorderColor:
+      - '{{colors.base.borderFocus}}'
     searchingActiveBorderColor:
       - '{{colors.accents.orange}}'
       - bold
@@ -15,12 +17,30 @@ gui:
       - '{{colors.accents.cyan}}'
     selectedLineBgColor:
       - '{{colors.dim.cyan}}'
+    inactiveViewSelectedLineBgColor:
+      - '{{colors.base.selection}}'
+    activeViewSelectedLineBgColor:
+      - '{{colors.dim.cyan}}'
+    inactiveViewSelectedLineFgColor:
+      - '{{colors.text.muted}}'
+    activeViewSelectedLineFgColor:
+      - '{{colors.text.foreground}}'
+    selectedRangeBgColor:
+      - '{{colors.dim.blue}}'
+    selectedRangeFgColor:
+      - '{{colors.text.foreground}}'
     cherryPickedCommitBgColor:
       - '{{colors.dim.purple}}'
     cherryPickedCommitFgColor:
       - '{{colors.accents.cyan}}'
     unstagedChangesColor:
       - '{{colors.accents.red}}'
+    stagedChangesColor:
+      - '{{colors.accents.green}}'
+    markedBaseCommitFgColor:
+      - '{{colors.accents.yellow}}'
+    markedBaseCommitBgColor:
+      - '{{colors.dim.yellow}}'
     defaultFgColor:
       - '{{colors.text.foreground}}'
   showIcons: true

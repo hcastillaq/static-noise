@@ -8,6 +8,8 @@ gui:
       - bold
     inactiveBorderColor:
       - '#272C3E'
+    searchingInactiveBorderColor:
+      - '#3D4460'
     searchingActiveBorderColor:
       - '#F3A261'
       - bold
@@ -15,12 +17,30 @@ gui:
       - '#72EAD5'
     selectedLineBgColor:
       - '#193C3B'
+    inactiveViewSelectedLineBgColor:
+      - '#242B3D'
+    activeViewSelectedLineBgColor:
+      - '#193C3B'
+    inactiveViewSelectedLineFgColor:
+      - '#9299AE'
+    activeViewSelectedLineFgColor:
+      - '#E6E2D6'
+    selectedRangeBgColor:
+      - '#20344D'
+    selectedRangeFgColor:
+      - '#E6E2D6'
     cherryPickedCommitBgColor:
       - '#332B4D'
     cherryPickedCommitFgColor:
       - '#72EAD5'
     unstagedChangesColor:
       - '#EF7785'
+    stagedChangesColor:
+      - '#A3D98B'
+    markedBaseCommitFgColor:
+      - '#EDD071'
+    markedBaseCommitBgColor:
+      - '#443B25'
     defaultFgColor:
       - '#E6E2D6'
   showIcons: true

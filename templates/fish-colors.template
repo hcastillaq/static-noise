@@ -7,7 +7,7 @@ set -g FZF_DEFAULT_OPTS " \
 --color=marker={{colors.accents.green}},fg+={{colors.text.foreground}},prompt={{colors.accents.cyan}},hl+={{colors.accents.cyan}}"
 
 set -g fish_color_command {{colors.accents.cyan}}
-set -g fish_color_keyword {{colors.accents.magenta}} --bold
+set -g fish_color_keyword {{colors.accents.purple}} --bold
 set -g fish_color_quote {{colors.accents.green}}
 set -g fish_color_redirection {{colors.accents.blue}}
 set -g fish_color_end {{colors.accents.orange}}

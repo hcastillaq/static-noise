@@ -7,7 +7,7 @@ set -g FZF_DEFAULT_OPTS " \
 --color=marker=#A3D98B,fg+=#E6E2D6,prompt=#72EAD5,hl+=#72EAD5"
 
 set -g fish_color_command #72EAD5
-set -g fish_color_keyword #F08BC2 --bold
+set -g fish_color_keyword #C2A7FF --bold
 set -g fish_color_quote #A3D98B
 set -g fish_color_redirection #83BFFF
 set -g fish_color_end #F3A261
