@@ -28,13 +28,24 @@ jobs:
               version: tag.replace(/^v/, ''),
               bootstrap: tag === 'v0.0.1',
             };
-            const { getOctokit } = require('@actions/github');
-            const githubWithSyncToken = getOctokit(process.env.SYNC_TOKEN);
             for (const repo of ['static-noise.vscode', 'static-noise.nvim']) {
-              await githubWithSyncToken.rest.repos.createDispatchEvent({
-                owner: context.repo.owner,
-                repo,
-                event_type: 'static-noise-release',
-                client_payload: payload,
-              });
+              const response = await fetch(
+                `https://api.github.com/repos/${context.repo.owner}/${repo}/dispatches`,
+                {
+                  method: 'POST',
+                  headers: {
+                    Accept: 'application/vnd.github+json',
+                    Authorization: `Bearer ${process.env.SYNC_TOKEN}`,
+                    'User-Agent': 'static-noise-sync',
+                    'X-GitHub-Api-Version': '2022-11-28',
+                  },
+                  body: JSON.stringify({
+                    event_type: 'static-noise-release',
+                    client_payload: payload,
+                  }),
+                },
+              );
+              if (!response.ok) {
+                throw new Error(`Dispatch to ${repo} failed with HTTP ${response.status}: ${await response.text()}`);
+              }
             }
