@@ -4,7 +4,7 @@
 2. Commit the source and generated `dist/` artifacts together.
 3. Create and push a matching tag, for example `v0.0.1`.
 
-The tag workflow dispatches the tag, version, and immutable commit SHA to the VS Code and Neovim consumers. Configure the fine-grained PAT secret `STATIC_NOISE_SYNC_TOKEN` in this repository with access to both consumer repositories and permission to dispatch repository events.
+Each tag workflow compares its consumer artifact with the preceding tag before dispatching the tag, version, and immutable commit SHA. VS Code is notified only when `dist/vscode/static-noise-color-theme.json` changes; Neovim is notified only when `dist/neovim/palette.lua` changes. Configure the PAT secret `STATIC_NOISE_SYNC_TOKEN` in this repository with access to both consumer repositories and permission to dispatch repository events.
 
 ## Bootstrap
 
