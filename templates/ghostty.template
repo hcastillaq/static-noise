@@ -3,9 +3,9 @@
 # Generated automatically from static-noise/palette.json
 # ==============================================================================
 
-background = {{colors.base.surface}}
+background = {{colors.base.void}}
 foreground = {{colors.text.foreground}}
-selection-background = {{colors.base.borderFocus}}
+selection-background = {{colors.base.selection}}
 selection-foreground = {{colors.text.foreground}}
 cursor-color = {{colors.accents.cyan}}
 

@@ -3,7 +3,7 @@
 
 [delta]
 syntax-theme = ansi
-minus-style = syntax "{{colors.diff.removedEmphasis}}"
+minus-style = syntax "{{colors.diff.removed}}"
 minus-emph-style = syntax "{{colors.diff.removedEmphasis}}"
 plus-style = syntax "{{colors.diff.added}}"
 plus-emph-style = syntax "{{colors.diff.addedEmphasis}}"

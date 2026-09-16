@@ -3,6 +3,8 @@
 # CONFIGURACIÓN DE STARSHIP (TEMA STATIC NOISE & FLAT NERD ICONS)
 # ==============================================================================
 
+palette = "static-noise"
+
 # --- CONFIGURACIÓN GLOBAL ---
 add_newline = false
 command_timeout = 2000
@@ -47,7 +49,7 @@ only_with_files = true
 # --- MISE ---
 [mise]
 disabled = false
-symbol = "󰊠 "
+symbol = " "
 format = '[$symbol$tool@$version]($style) '
 style = 'bold fg:{{colors.accents.purple}}' # Purple
 
@@ -103,7 +105,7 @@ style = 'bold fg:{{colors.accents.purple}}' # Purple (Ramas Git)
 [git_status]
 format = '([$all_status$ahead_behind]($style) )'
 style = 'bold fg:{{colors.accents.orange}}' # Orange (Modificaciones)
-conflicted = "󰞇 "
+conflicted = " "
 ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
@@ -129,3 +131,19 @@ style = 'bold fg:{{colors.accents.yellow}}' # Yellow (Duración y métricas)
 success_symbol = '[->](bold fg:{{colors.accents.cyan}})' # Cyan (Foco activo)
 error_symbol = '[->](bold fg:{{colors.accents.red}})'   # Red (Error)
 vimcmd_symbol = '[<-](bold fg:{{colors.accents.green}})'  # Green (Modo normal Vi)
+
+[palettes.static-noise]
+void = "{{colors.base.void}}"
+surface = "{{colors.base.surface}}"
+foreground = "{{colors.text.foreground}}"
+soft = "{{colors.text.soft}}"
+muted = "{{colors.text.muted}}"
+dim = "{{colors.text.dim}}"
+cyan = "{{colors.accents.cyan}}"
+blue = "{{colors.accents.blue}}"
+purple = "{{colors.accents.purple}}"
+magenta = "{{colors.accents.magenta}}"
+green = "{{colors.accents.green}}"
+yellow = "{{colors.accents.yellow}}"
+orange = "{{colors.accents.orange}}"
+red = "{{colors.accents.red}}"

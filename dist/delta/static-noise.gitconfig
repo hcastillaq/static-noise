@@ -3,7 +3,7 @@
 
 [delta]
 syntax-theme = ansi
-minus-style = syntax "#6B2B38"
+minus-style = syntax "#48262E"
 minus-emph-style = syntax "#6B2B38"
 plus-style = syntax "#293B2C"
 plus-emph-style = syntax "#3A5C3E"

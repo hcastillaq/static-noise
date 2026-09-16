@@ -3,7 +3,6 @@ layout {
     pane
     pane size=1 borderless=true {
         plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-            // Layout general
             format_left   "{mode} {tabs}"
             format_right  "#[bg={{colors.base.card}},fg={{colors.accents.cyan}},bold]  {session} #[bg={{colors.base.cardHover}},fg={{colors.text.foreground}}]  {datetime} "
             format_space  " "

@@ -2,35 +2,35 @@
 # Generated from palette.json. Do not edit generated output manually.
 
 set -g FZF_DEFAULT_OPTS " \
---color=bg+={{colors.dim.cyan}},bg={{colors.base.surface}},spinner={{colors.accents.red}},hl={{colors.accents.magenta}} \
---color=fg={{colors.text.foreground}},header={{colors.accents.blue}},info={{colors.accents.blue}},pointer={{colors.accents.cyan}} \
---color=marker={{colors.accents.green}},fg+={{colors.text.foreground}},prompt={{colors.accents.cyan}},hl+={{colors.accents.cyan}}"
+--color=bg+:{{colors.dim.cyan}},bg:-1,spinner:{{colors.accents.red}},hl:{{colors.accents.magenta}} \
+--color=fg:{{colors.text.foreground}},header:{{colors.accents.blue}},info:{{colors.accents.blue}},pointer:{{colors.accents.cyan}} \
+--color=marker:{{colors.accents.green}},fg+:{{colors.text.foreground}},prompt:{{colors.accents.cyan}},hl+:{{colors.accents.cyan}}"
 
-set -g fish_color_command {{colors.accents.cyan}}
-set -g fish_color_keyword {{colors.accents.purple}} --bold
-set -g fish_color_quote {{colors.accents.green}}
-set -g fish_color_redirection {{colors.accents.blue}}
-set -g fish_color_end {{colors.accents.orange}}
-set -g fish_color_error {{colors.accents.red}} --bold
-set -g fish_color_normal {{colors.text.foreground}}
-set -g fish_color_param {{colors.text.foreground}}
-set -g fish_color_option {{colors.accents.purple}}
-set -g fish_color_comment {{colors.text.muted}}
-set -g fish_color_autosuggestion {{colors.text.dim}}
-set -g fish_color_operator {{colors.accents.cyan}}
-set -g fish_color_escape {{colors.accents.blue}}
-set -g fish_color_selection --background={{colors.dim.cyan}}
-set -g fish_color_search_match --background={{colors.dim.yellow}}
-set -g fish_color_cancel {{colors.accents.red}} --reverse
-set -g fish_color_cwd {{colors.accents.blue}}
-set -g fish_color_user {{colors.accents.cyan}}
-set -g fish_color_host {{colors.accents.green}}
-set -g fish_pager_color_prefix {{colors.accents.cyan}} --bold
-set -g fish_pager_color_completion {{colors.text.foreground}}
-set -g fish_pager_color_description {{colors.text.muted}}
-set -g fish_pager_color_progress {{colors.accents.blue}} --bold
-set -g fish_pager_color_selected_background --background={{colors.dim.cyan}}
-set -g fish_pager_color_selected_prefix {{colors.accents.cyan}} --bold
-set -g fish_pager_color_selected_completion {{colors.text.foreground}} --bold
-set -g fish_pager_color_selected_description {{colors.text.soft}}
-set -g fish_pager_color_secondary_background --background={{colors.base.card}}
+set -g fish_color_command {{formats.hexBare.colors.accents.cyan}}
+set -g fish_color_keyword {{formats.hexBare.colors.accents.purple}} --bold
+set -g fish_color_quote {{formats.hexBare.colors.accents.green}}
+set -g fish_color_redirection {{formats.hexBare.colors.accents.blue}}
+set -g fish_color_end {{formats.hexBare.colors.accents.orange}}
+set -g fish_color_error {{formats.hexBare.colors.accents.red}} --bold
+set -g fish_color_normal {{formats.hexBare.colors.text.foreground}}
+set -g fish_color_param {{formats.hexBare.colors.text.foreground}}
+set -g fish_color_option {{formats.hexBare.colors.accents.purple}}
+set -g fish_color_comment {{formats.hexBare.colors.text.muted}}
+set -g fish_color_autosuggestion {{formats.hexBare.colors.text.dim}}
+set -g fish_color_operator {{formats.hexBare.colors.accents.cyan}}
+set -g fish_color_escape {{formats.hexBare.colors.accents.blue}}
+set -g fish_color_selection --background={{formats.hexBare.colors.dim.cyan}}
+set -g fish_color_search_match --background={{formats.hexBare.colors.dim.yellow}}
+set -g fish_color_cancel {{formats.hexBare.colors.accents.red}} --reverse
+set -g fish_color_cwd {{formats.hexBare.colors.accents.blue}}
+set -g fish_color_user {{formats.hexBare.colors.accents.cyan}}
+set -g fish_color_host {{formats.hexBare.colors.accents.green}}
+set -g fish_pager_color_prefix {{formats.hexBare.colors.accents.cyan}} --bold
+set -g fish_pager_color_completion {{formats.hexBare.colors.text.foreground}}
+set -g fish_pager_color_description {{formats.hexBare.colors.text.muted}}
+set -g fish_pager_color_progress {{formats.hexBare.colors.accents.blue}} --bold
+set -g fish_pager_color_selected_background --background={{formats.hexBare.colors.dim.cyan}}
+set -g fish_pager_color_selected_prefix {{formats.hexBare.colors.accents.cyan}} --bold
+set -g fish_pager_color_selected_completion {{formats.hexBare.colors.text.foreground}} --bold
+set -g fish_pager_color_selected_description {{formats.hexBare.colors.text.soft}}
+set -g fish_pager_color_secondary_background --background={{formats.hexBare.colors.base.card}}

@@ -8,6 +8,7 @@
     "overlay": "#222738",
     "selection": "#242B3D",
     "border": "#272C3E",
+    "borderStrong": "#6E7588",
     "text": "#E6E2D6",
     "textSoft": "#C9C8C2",
     "muted": "#9299AE",
@@ -31,7 +32,7 @@
   },
   "colors": {
     "accent": "cyan",
-    "border": "blue",
+    "border": "borderStrong",
     "borderAccent": "cyan",
     "borderMuted": "border",
     "success": "green",

@@ -1,40 +1,55 @@
 import assert from 'node:assert/strict';
-import { readFile, stat } from 'node:fs/promises';
+import { cp, mkdtemp, readFile } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 
+import { publishArtifacts, renderAllTargets, TARGETS } from '../src/compiler.mjs';
+import { validateTargetArtifact } from '../src/validate.mjs';
+
 const ROOT_DIR = path.resolve(import.meta.dirname, '..');
-const VSCODE_THEME_PATH = path.join(ROOT_DIR, 'dist', 'vscode', 'static-noise-color-theme.json');
 
-test('generated vscode theme exists and is valid', async () => {
-  await stat(VSCODE_THEME_PATH);
-  const raw = await readFile(VSCODE_THEME_PATH, 'utf-8');
-  assert.ok(!raw.includes('{{'), 'Theme must not contain unparsed template tokens');
+test('all generated targets compile and pass their specific validators', async () => {
+  const artifacts = await renderAllTargets({
+    rootDir: ROOT_DIR,
+    validate: (target, rendered, { rootDir }) => validateTargetArtifact(target, rendered, { rootDir }),
+  });
 
-  const theme = JSON.parse(raw);
-  assert.equal(theme.name, 'Static Noise');
-  assert.equal(theme.type, 'dark');
-  assert.equal(theme.semanticHighlighting, true);
-
-  assert.ok(theme.colors && typeof theme.colors === 'object');
-  assert.ok(Array.isArray(theme.tokenColors) && theme.tokenColors.length > 0);
-  assert.ok(theme.semanticTokenColors && typeof theme.semanticTokenColors === 'object');
-
-  const hexRegex = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
-  for (const [key, color] of Object.entries(theme.colors)) {
-    assert.match(color, hexRegex, `theme.colors["${key}"] must be a valid hex color`);
+  assert.equal(artifacts.size, TARGETS.length + 1);
+  for (const target of TARGETS) {
+    assert.ok(artifacts.has(target.output), `Missing artifact for ${target.output}`);
+    const content = artifacts.get(target.output);
+    assert.ok(!content.includes('{{'), `${target.output} contains unresolved tokens`);
+    assert.ok(!content.includes('borderFocus'), `${target.output} still references borderFocus`);
   }
+});
 
-  for (const [token, value] of Object.entries(theme.semanticTokenColors)) {
-    const color = typeof value === 'string' ? value : value?.foreground;
-    if (color) {
-      assert.match(color, hexRegex, `semanticTokenColors["${token}"] must be a valid hex color`);
-    }
-  }
+test('compilation is byte-identical across two runs', async () => {
+  const rootDir = await mkdtemp(path.join(os.tmpdir(), 'static-noise-build-'));
+  await cp(path.join(ROOT_DIR, 'palette.json'), path.join(rootDir, 'palette.json'));
+  await cp(path.join(ROOT_DIR, 'package.json'), path.join(rootDir, 'package.json'));
+  await cp(path.join(ROOT_DIR, 'templates'), path.join(rootDir, 'templates'), { recursive: true });
+  await cp(path.join(ROOT_DIR, 'schemas'), path.join(rootDir, 'schemas'), { recursive: true });
 
-  for (const rule of theme.tokenColors) {
-    if (rule.settings?.foreground) {
-      assert.match(rule.settings.foreground, hexRegex, `tokenColors rule "${rule.name}" foreground must be a valid hex color`);
-    }
+  const firstDir = path.join(rootDir, 'dist-one');
+  const secondDir = path.join(rootDir, 'dist-two');
+
+  const first = await publishArtifacts({
+    rootDir,
+    outputDir: firstDir,
+    validate: (target, rendered) => validateTargetArtifact(target, rendered, { rootDir }),
+  });
+  const second = await publishArtifacts({
+    rootDir,
+    outputDir: secondDir,
+    validate: (target, rendered) => validateTargetArtifact(target, rendered, { rootDir }),
+  });
+
+  assert.deepEqual([...first.entries()], [...second.entries()]);
+  for (const artifactPath of first.keys()) {
+    const rel = path.relative('dist', artifactPath);
+    const firstContent = await readFile(path.join(firstDir, rel), 'utf8');
+    const secondContent = await readFile(path.join(secondDir, rel), 'utf8');
+    assert.equal(firstContent, secondContent, `Mismatch in ${rel}`);
   }
 });

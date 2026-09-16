@@ -1,20 +1,65 @@
 // ==============================================================================
-// Zellij — Static Noise Palette Definition
+// Zellij — Static Noise Component Theme (Zellij 0.45+)
 // Generated automatically from static-noise/palette.json
 // ==============================================================================
 
 themes {
     static-noise {
-        fg "#E6E2D6"
-        bg "#141720"
-        black "#141720"
-        red "#EF7785"
-        green "#A3D98B"
-        yellow "#EDD071"
-        blue "#83BFFF"
-        magenta "#C2A7FF"
-        cyan "#72EAD5"
-        white "#E6E2D6"
-        orange "#F3A261"
+        text_unselected {
+            base 230 226 214
+            background 20 23 32
+        }
+        text_selected {
+            base 230 226 214
+            background 36 43 61
+            emphasis_0 114 234 213
+        }
+        ribbon_unselected {
+            base 146 153 174
+            background 26 30 43
+        }
+        ribbon_selected {
+            base 15 17 23
+            background 114 234 213
+            emphasis_0 25 60 59
+        }
+        table_title {
+            base 114 234 213
+            background 26 30 43
+        }
+        table_cell_unselected {
+            base 230 226 214
+            background 20 23 32
+        }
+        table_cell_selected {
+            base 230 226 214
+            background 36 43 61
+        }
+        list_unselected {
+            base 201 200 194
+            background 20 23 32
+        }
+        list_selected {
+            base 230 226 214
+            background 36 43 61
+        }
+        frame_unselected {
+            base 110 117 136
+            background 20 23 32
+        }
+        frame_selected {
+            base 114 234 213
+            background 20 23 32
+        }
+        frame_highlight {
+            base 243 162 97
+            background 20 23 32
+        }
+        exit_code_success {
+            base 163 217 139
+        }
+        exit_code_error {
+            base 239 119 133
+        }
     }
 }

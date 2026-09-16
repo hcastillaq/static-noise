@@ -3,6 +3,8 @@
 # CONFIGURACIÓN DE STARSHIP (TEMA STATIC NOISE & FLAT NERD ICONS)
 # ==============================================================================
 
+palette = "static-noise"
+
 # --- CONFIGURACIÓN GLOBAL ---
 add_newline = false
 command_timeout = 2000
@@ -47,7 +49,7 @@ only_with_files = true
 # --- MISE ---
 [mise]
 disabled = false
-symbol = "󰊠 "
+symbol = " "
 format = '[$symbol$tool@$version]($style) '
 style = 'bold fg:#C2A7FF' # Purple
 
@@ -103,7 +105,7 @@ style = 'bold fg:#C2A7FF' # Purple (Ramas Git)
 [git_status]
 format = '([$all_status$ahead_behind]($style) )'
 style = 'bold fg:#F3A261' # Orange (Modificaciones)
-conflicted = "󰞇 "
+conflicted = " "
 ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
@@ -129,3 +131,19 @@ style = 'bold fg:#EDD071' # Yellow (Duración y métricas)
 success_symbol = '[->](bold fg:#72EAD5)' # Cyan (Foco activo)
 error_symbol = '[->](bold fg:#EF7785)'   # Red (Error)
 vimcmd_symbol = '[<-](bold fg:#A3D98B)'  # Green (Modo normal Vi)
+
+[palettes.static-noise]
+void = "#0F1117"
+surface = "#141720"
+foreground = "#E6E2D6"
+soft = "#C9C8C2"
+muted = "#9299AE"
+dim = "#62697B"
+cyan = "#72EAD5"
+blue = "#83BFFF"
+purple = "#C2A7FF"
+magenta = "#F08BC2"
+green = "#A3D98B"
+yellow = "#EDD071"
+orange = "#F3A261"
+red = "#EF7785"

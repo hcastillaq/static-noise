@@ -1,6 +1,6 @@
 {
   "name": "Static Noise",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "High-contrast dark design system and color palette",
   "author": "Hernan Castilla <hcastillaq@gmail.com>",
   "colors": {
@@ -10,7 +10,7 @@
       "card": "#1A1E2B",
       "cardHover": "#222738",
       "border": "#272C3E",
-      "borderFocus": "#3D4460",
+      "borderStrong": "#6E7588",
       "selection": "#242B3D"
     },
     "text": {
