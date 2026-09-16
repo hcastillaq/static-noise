@@ -35,7 +35,7 @@ Colores base principales:
 - `surface`: `#141720`
 - `card`: `#1A1E2B`
 - `border`: `#272C3E`
-- `borderFocus`: `#3D4460`
+- `borderStrong`: `#6E7588` (delimitadores estructurales, >= 3:1 contra `void` y fondos compuestos)
 - `foreground`: `#E6E2D6`
 - `muted`: `#9299AE`
 - `dim`: `#62697B`
@@ -61,7 +61,8 @@ Conservar la semántica y el contraste al introducir o modificar tokens. Evitar 
 - `dist/`: archivos generados y publicados.
 - `README.md`: documentación pública y tabla de colores.
 - `RELEASING.md`: proceso de publicación y sincronización.
-- `.github/workflows/verify.yml`: recompila y falla si `dist/` no está actualizado.
+- `compatibility.json`: matriz de compatibilidad con versiones soportadas y validadores por target.
+- `.github/workflows/verify.yml`: valida dependencias, compila, corre tests y smoke checks nativos, y falla si `dist/` no está actualizado.
 - `.github/workflows/dispatch-vscode.yml`: sincroniza el artefacto de VS Code al crear tags `v*`.
 - `.github/workflows/dispatch-neovim.yml`: sincroniza el artefacto de Neovim al crear tags `v*`.
 
@@ -85,10 +86,22 @@ El compilador además valida que no queden placeholders `{{...}}` y que los targ
 
 ## Flujo de trabajo esperado
 
+### Ramas y estrategia Git
+
+- **`main`**: rama protegida y de producción. Solo recibe merges listos para release o tags oficiales. No se trabaja directamente en `main` ni se envían PRs directos sin pasar por integración.
+- **`develop`**: punto medio de integración continua y base para nuevas características o refactors. Todas las ramas de trabajo (`feature/*`, `refactor/*`, `fix/*`) se abren desde `develop` y se mergean hacia `develop` mediante Pull Request.
+- **Flujo habitual:**
+  1. Partir desde `develop` actualizado: `git checkout -b feature/nombre develop` (o `refactor/*`).
+  2. Implementar, validar localmente (`npm test`, `npm run verify:native`) y compilar.
+  3. Abrir PR hacia `develop`.
+  4. La promoción a `main` se realiza desde `develop` cuando el conjunto de cambios está estabilizado y preparado para un tag de versión.
+
 ### Cambios de paleta o temas
 
 ```bash
 npm run build
+npm test
+npm run verify:native
 git diff -- palette.json templates/ dist/
 ```
 
@@ -96,14 +109,19 @@ Si se modifica `palette.json`, deben incluirse en el mismo cambio los artefactos
 
 ### Verificación
 
-No hay suite de tests dedicada actualmente. La verificación canónica es:
+El proyecto cuenta con validación estricta y suite de tests determinista:
 
 ```bash
 npm run build
+npm test
+npm run verify:native -- --strict
 git diff --exit-code -- dist
 ```
 
-El segundo comando se ejecuta después de compilar en CI y confirma que el contenido generado está committed.
+1. `npm run build`: compilador transaccional en memoria; no modifica `dist/` si algún target falla.
+2. `npm test`: suite de pruebas (esquemas, contrastes, sintaxis Lua/Fish/TOML/YAML/JSON/KDL, determinismo).
+3. `npm run verify:native -- --strict`: invoca los binarios nativos oficiales de cada herramienta configurada en `compatibility.json`.
+4. `git diff --exit-code -- dist`: confirma que el contenido generado está committed exactamente como lo produce el compilador.
 
 ### Releases
 
@@ -127,12 +145,14 @@ El segundo comando se ejecuta después de compilar en CI y confirma que el conte
 
 ## Checklist para asistentes de IA
 
+- [ ] Trabajé sobre la rama de características o `develop`, no directamente sobre `main`.
 - [ ] Identifiqué la fuente de verdad y los targets afectados.
 - [ ] No edité `dist/` como fuente primaria.
-- [ ] Ejecuté `npm run build`.
-- [ ] No quedaron placeholders sin resolver.
-- [ ] Los JSON generados son válidos.
+- [ ] Ejecuté `npm run build` y `npm test`.
+- [ ] Verifiqué con `npm run verify:native`.
+- [ ] No quedaron placeholders sin resolver ni tokens obsoletos (`borderFocus`).
+- [ ] Los JSON, KDL, TOML, YAML y Lua generados son válidos.
 - [ ] `git diff --exit-code -- dist` pasa después de compilar.
-- [ ] Revisé que el contraste y la semántica de los colores no se hayan degradado.
+- [ ] Revisé que el contraste y la semántica de los colores no se hayan degradado (mínimo 3:1 para `borderStrong`).
 - [ ] Actualicé documentación si cambió la API o semántica pública.
 - [ ] No incluí secretos ni cambios accidentales.
