@@ -72,7 +72,7 @@ palette.highlights = {
   ColorColumn = { bg = palette.base },
   CursorLineNr = { fg = palette.cyan, bg = palette.base, bold = true },
   LineNr = { fg = palette.disabled, bg = palette.void },
-  WinSeparator = { fg = palette.border, bg = palette.void },
+  WinSeparator = { fg = palette.borderFocus, bg = palette.void },
   Visual = { fg = palette.text, bg = palette.selection },
   Search = { fg = palette.void, bg = palette.yellow, bold = true },
   IncSearch = { fg = palette.void, bg = palette.orange, bold = true },
@@ -95,7 +95,7 @@ palette.highlights = {
   TabLineSel = { fg = palette.void, bg = palette.cyan, bold = true },
   WinBar = { fg = palette.textSoft, bg = palette.void, bold = true },
   WinBarNC = { fg = palette.muted, bg = palette.void },
-  VertSplit = { fg = palette.border, bg = palette.void },
+  VertSplit = { fg = palette.borderFocus, bg = palette.void }
   Directory = { fg = palette.blue, bold = true },
   Title = { fg = palette.purple, bold = true },
   Question = { fg = palette.green },

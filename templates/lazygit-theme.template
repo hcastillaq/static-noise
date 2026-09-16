@@ -7,7 +7,7 @@ gui:
       - '{{colors.accents.cyan}}'
       - bold
     inactiveBorderColor:
-      - '{{colors.base.border}}'
+      - '{{colors.base.borderFocus}}'
     searchingInactiveBorderColor:
       - '{{colors.base.borderFocus}}'
     searchingActiveBorderColor:
