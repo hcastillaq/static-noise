@@ -1,4 +1,4 @@
-# Static Noise theme for lazygit
+# Static Noise theme for lazygit (0.64+)
 # Generated from palette.json. Do not edit generated output manually.
 
 gui:
@@ -7,9 +7,7 @@ gui:
       - '{{colors.accents.cyan}}'
       - bold
     inactiveBorderColor:
-      - '{{colors.base.borderFocus}}'
-    searchingInactiveBorderColor:
-      - '{{colors.base.borderFocus}}'
+      - '{{colors.base.borderStrong}}'
     searchingActiveBorderColor:
       - '{{colors.accents.orange}}'
       - bold
@@ -19,28 +17,12 @@ gui:
       - '{{colors.dim.cyan}}'
     inactiveViewSelectedLineBgColor:
       - '{{colors.base.selection}}'
-    activeViewSelectedLineBgColor:
-      - '{{colors.dim.cyan}}'
-    inactiveViewSelectedLineFgColor:
-      - '{{colors.text.muted}}'
-    activeViewSelectedLineFgColor:
-      - '{{colors.text.foreground}}'
-    selectedRangeBgColor:
-      - '{{colors.dim.blue}}'
-    selectedRangeFgColor:
-      - '{{colors.text.foreground}}'
     cherryPickedCommitBgColor:
       - '{{colors.dim.purple}}'
     cherryPickedCommitFgColor:
       - '{{colors.accents.cyan}}'
     unstagedChangesColor:
       - '{{colors.accents.red}}'
-    stagedChangesColor:
-      - '{{colors.accents.green}}'
-    markedBaseCommitFgColor:
-      - '{{colors.accents.yellow}}'
-    markedBaseCommitBgColor:
-      - '{{colors.dim.yellow}}'
     defaultFgColor:
       - '{{colors.text.foreground}}'
   showIcons: true

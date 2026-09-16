@@ -3,9 +3,9 @@
 # Generated automatically from static-noise/palette.json
 # ==============================================================================
 
-background = #141720
+background = #0F1117
 foreground = #E6E2D6
-selection-background = #3D4460
+selection-background = #242B3D
 selection-foreground = #E6E2D6
 cursor-color = #72EAD5
 

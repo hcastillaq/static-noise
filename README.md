@@ -10,13 +10,15 @@ Static Noise es una paleta oscura y profunda con acentos en tonos pastel eléctr
 
 ### Colores Base
 
-| Token         | Hex       | Rol de interfaz                                            |
-| :------------ | :-------- | :--------------------------------------------------------- |
-| `void`        | `#0F1117` | Fondos ultra-profundos, barras laterales, bordes inactivos |
-| `surface`     | `#141720` | Fondo principal del editor y la terminal                   |
-| `card`        | `#1A1E2B` | Tarjetas, líneas activas y menús flotantes                 |
-| `border`      | `#272C3E` | Delimitadores y bordes sutiles                             |
-| `borderFocus` | `#3D4460` | Bordes activos y selecciones                               |
+| Token          | Hex       | Rol de interfaz                                            |
+| :------------- | :-------- | :--------------------------------------------------------- |
+| `void`         | `#0F1117` | Fondos ultra-profundos, barras laterales, fondo raíz Ghostty |
+| `surface`      | `#141720` | Superficies internas del editor y paneles terminales       |
+| `card`         | `#1A1E2B` | Tarjetas, líneas activas y menús flotantes                 |
+| `border`       | `#272C3E` | Delimitadores y bordes sutiles                             |
+| `borderStrong` | `#6E7588` | Delimitadores estructurales, separadores y bordes inactivos (>= 3:1) |
+
+> **Migración:** `borderFocus` ha sido retirado. Los límites estructurales ahora usan `borderStrong`, mientras que el foco activo y la interacción quedan gobernados por `cyan` (`#72EAD5`).
 
 ### Texto
 
@@ -46,6 +48,8 @@ Este repositorio actúa como el compilador central. Leyendo el archivo `palette.
 
 ```bash
 npm run build
+npm test
+npm run verify:native
 ```
 
 ### Targets Generados

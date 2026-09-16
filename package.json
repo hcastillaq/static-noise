@@ -1,11 +1,13 @@
 {
   "name": "@hcastillaq/static-noise",
   "version": "0.0.2",
+  "type": "module",
   "description": "High-contrast dark design system and multi-target palette compiler",
   "main": "dist/palette.min.json",
   "scripts": {
     "build": "node src/build.js",
-    "test": "node --test"
+    "test": "node --test",
+    "verify:native": "node src/verify-native.mjs"
   },
   "keywords": [
     "theme",
@@ -18,5 +20,11 @@
     "vscode"
   ],
   "author": "Hernan Castilla <hcastillaq@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@iarna/toml": "^2.2.5",
+    "ajv": "^8.20.0",
+    "luaparse": "^0.3.1",
+    "yaml": "^2.9.1"
+  }
 }

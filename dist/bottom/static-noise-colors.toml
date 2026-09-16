@@ -1,23 +1,34 @@
-# Static Noise colors for bottom
+# Static Noise colors for bottom (0.14+)
 # Generated from palette.json. Do not edit generated output manually.
 
-[colors]
-table_header_color = "#72EAD5"
-all_cpu_color = "#C2A7FF"
-avg_cpu_color = "#EF7785"
+[styles.tables]
+headers = { color = "#72EAD5", bold = true }
+
+[styles.cpu]
+all_entry_color = "#C2A7FF"
+avg_entry_color = "#EF7785"
 cpu_core_colors = ["#72EAD5", "#83BFFF", "#A3D98B", "#EDD071", "#F3A261", "#C2A7FF"]
+
+[styles.memory]
 ram_color = "#A3D98B"
 swap_color = "#F3A261"
+
+[styles.network]
 rx_color = "#72EAD5"
 tx_color = "#C2A7FF"
-widget_title_color = "#72EAD5"
-border_color = "#3D4460"
-highlighted_border_color = "#72EAD5"
-text_color = "#E6E2D6"
-graph_color = "#62697B"
-cursor_color = "#72EAD5"
-selected_text_color = "#E6E2D6"
-selected_bg_color = "#193C3B"
+
+[styles.battery]
 high_battery_color = "#A3D98B"
 medium_battery_color = "#EDD071"
 low_battery_color = "#EF7785"
+
+[styles.graphs]
+graph_color = "#62697B"
+
+[styles.widgets]
+border_color = "#6E7588"
+selected_border_color = "#72EAD5"
+widget_title = { color = "#72EAD5" }
+text = { color = "#E6E2D6" }
+selected_text = { color = "#E6E2D6", bg_color = "#193C3B" }
+disabled_text = { color = "#62697B" }

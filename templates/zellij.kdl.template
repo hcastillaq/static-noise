@@ -1,20 +1,65 @@
 // ==============================================================================
-// Zellij — Static Noise Palette Definition
+// Zellij — Static Noise Component Theme (Zellij 0.45+)
 // Generated automatically from static-noise/palette.json
 // ==============================================================================
 
 themes {
     static-noise {
-        fg "{{colors.text.foreground}}"
-        bg "{{colors.base.surface}}"
-        black "{{ansi.black}}"
-        red "{{ansi.red}}"
-        green "{{ansi.green}}"
-        yellow "{{ansi.yellow}}"
-        blue "{{ansi.blue}}"
-        magenta "{{ansi.magenta}}"
-        cyan "{{ansi.cyan}}"
-        white "{{ansi.white}}"
-        orange "{{colors.accents.orange}}"
+        text_unselected {
+            base {{formats.rgb.colors.text.foreground}}
+            background {{formats.rgb.colors.base.surface}}
+        }
+        text_selected {
+            base {{formats.rgb.colors.text.foreground}}
+            background {{formats.rgb.colors.base.selection}}
+            emphasis_0 {{formats.rgb.colors.accents.cyan}}
+        }
+        ribbon_unselected {
+            base {{formats.rgb.colors.text.muted}}
+            background {{formats.rgb.colors.base.card}}
+        }
+        ribbon_selected {
+            base {{formats.rgb.colors.base.void}}
+            background {{formats.rgb.colors.accents.cyan}}
+            emphasis_0 {{formats.rgb.colors.dim.cyan}}
+        }
+        table_title {
+            base {{formats.rgb.colors.accents.cyan}}
+            background {{formats.rgb.colors.base.card}}
+        }
+        table_cell_unselected {
+            base {{formats.rgb.colors.text.foreground}}
+            background {{formats.rgb.colors.base.surface}}
+        }
+        table_cell_selected {
+            base {{formats.rgb.colors.text.foreground}}
+            background {{formats.rgb.colors.base.selection}}
+        }
+        list_unselected {
+            base {{formats.rgb.colors.text.soft}}
+            background {{formats.rgb.colors.base.surface}}
+        }
+        list_selected {
+            base {{formats.rgb.colors.text.foreground}}
+            background {{formats.rgb.colors.base.selection}}
+        }
+        frame_unselected {
+            base {{formats.rgb.colors.base.borderStrong}}
+            background {{formats.rgb.colors.base.surface}}
+        }
+        frame_selected {
+            base {{formats.rgb.colors.accents.cyan}}
+            background {{formats.rgb.colors.base.surface}}
+        }
+        frame_highlight {
+            base {{formats.rgb.colors.accents.orange}}
+            background {{formats.rgb.colors.base.surface}}
+        }
+        exit_code_success {
+            base {{formats.rgb.colors.accents.green}}
+        }
+        exit_code_error {
+            base {{formats.rgb.colors.accents.red}}
+        }
     }
 }

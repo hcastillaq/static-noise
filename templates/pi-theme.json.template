@@ -8,6 +8,7 @@
     "overlay": "{{colors.base.cardHover}}",
     "selection": "{{colors.base.selection}}",
     "border": "{{colors.base.border}}",
+    "borderStrong": "{{colors.base.borderStrong}}",
     "text": "{{colors.text.foreground}}",
     "textSoft": "{{colors.text.soft}}",
     "muted": "{{colors.text.muted}}",
@@ -31,7 +32,7 @@
   },
   "colors": {
     "accent": "cyan",
-    "border": "blue",
+    "border": "borderStrong",
     "borderAccent": "cyan",
     "borderMuted": "border",
     "success": "green",
