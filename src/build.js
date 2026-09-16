@@ -23,6 +23,47 @@ function getNestedValue(obj, keyPath) {
   return keyPath.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : undefined), obj);
 }
 
+// Target-specific validators
+function validateVscodeTheme(renderedJson, templateName) {
+  const theme = JSON.parse(renderedJson);
+  if (!theme.name || typeof theme.name !== 'string') {
+    throw new Error(`[${templateName}] Missing or invalid "name"`);
+  }
+  if (!theme.type || !['dark', 'light', 'hcDark', 'hcLight'].includes(theme.type)) {
+    throw new Error(`[${templateName}] Missing or invalid "type"`);
+  }
+  if (theme.semanticHighlighting !== true) {
+    throw new Error(`[${templateName}] Expected "semanticHighlighting": true`);
+  }
+  if (!theme.colors || typeof theme.colors !== 'object') {
+    throw new Error(`[${templateName}] Missing or invalid "colors" map`);
+  }
+  if (!theme.tokenColors || !Array.isArray(theme.tokenColors) || theme.tokenColors.length === 0) {
+    throw new Error(`[${templateName}] Missing or empty "tokenColors" array`);
+  }
+  if (!theme.semanticTokenColors || typeof theme.semanticTokenColors !== 'object') {
+    throw new Error(`[${templateName}] Missing or invalid "semanticTokenColors" map`);
+  }
+
+  const hexColorRegex = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
+  for (const [key, val] of Object.entries(theme.colors)) {
+    if (typeof val !== 'string' || !hexColorRegex.test(val)) {
+      throw new Error(`[${templateName}] Invalid hex color in colors["${key}"]: "${val}"`);
+    }
+  }
+  for (const [key, val] of Object.entries(theme.semanticTokenColors)) {
+    const colorVal = typeof val === 'string' ? val : val?.foreground;
+    if (colorVal && !hexColorRegex.test(colorVal)) {
+      throw new Error(`[${templateName}] Invalid hex color in semanticTokenColors["${key}"]: "${colorVal}"`);
+    }
+  }
+  for (const rule of theme.tokenColors) {
+    if (rule.settings?.foreground && !hexColorRegex.test(rule.settings.foreground)) {
+      throw new Error(`[${templateName}] Invalid hex color in tokenColors rule "${rule.name}": "${rule.settings.foreground}"`);
+    }
+  }
+}
+
 // Replace {{key.path}} with value
 function renderTemplate(templateContent, data) {
   return templateContent.replace(/\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}/g, (match, keyPath) => {
@@ -67,6 +108,7 @@ const targets = [
     template: 'vscode.json.template',
     output: path.join(DIST_DIR, 'vscode', 'static-noise-color-theme.json'),
     format: 'json',
+    validate: validateVscodeTheme,
   },
   {
     template: 'fish-colors.template',
@@ -113,6 +155,9 @@ for (const target of targets) {
   }
   if (target.format === 'json') {
     JSON.parse(rendered);
+  }
+  if (typeof target.validate === 'function') {
+    target.validate(rendered, target.template);
   }
 
   ensureDir(path.dirname(target.output));

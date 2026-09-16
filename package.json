@@ -4,7 +4,8 @@
   "description": "High-contrast dark design system and multi-target palette compiler",
   "main": "dist/palette.min.json",
   "scripts": {
-    "build": "node src/build.js"
+    "build": "node src/build.js",
+    "test": "node --test"
   },
   "keywords": [
     "theme",
