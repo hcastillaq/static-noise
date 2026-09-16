@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, copyFile, rm } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -25,8 +27,18 @@ for (const [id, target] of Object.entries(compatibility.targets)) {
     continue;
   }
 
+  let tempConfigDir = null;
+  if (target.nativeArgs.some((arg) => arg.includes('{tempThemeDir}'))) {
+    tempConfigDir = await mkdtemp(path.join(os.tmpdir(), 'static-noise-zellij-'));
+    const themesDir = path.join(tempConfigDir, 'themes');
+    await mkdir(themesDir, { recursive: true });
+    await copyFile(path.join(ROOT_DIR, target.output), path.join(themesDir, 'static-noise.kdl'));
+  }
+
   const resolvedArgs = target.nativeArgs.map((arg) => (
-    arg.replace('{output}', path.join(ROOT_DIR, target.output))
+    arg
+      .replace('{output}', path.join(ROOT_DIR, target.output))
+      .replace('{tempThemeDir}', tempConfigDir || '')
   ));
 
   const run = spawnSync(target.nativeCommand, resolvedArgs, {
@@ -34,6 +46,10 @@ for (const [id, target] of Object.entries(compatibility.targets)) {
     encoding: 'utf8',
     stdio: 'pipe',
   });
+
+  if (tempConfigDir) {
+    await rm(tempConfigDir, { recursive: true, force: true });
+  }
 
   if (run.status === 0) {
     console.log(`  ✓ [${id}] Verified with ${target.nativeCommand} ${target.version}`);
