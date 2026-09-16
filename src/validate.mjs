@@ -59,9 +59,25 @@ export function validateZellijTheme(content) {
     'frame_highlight', 'exit_code_success', 'exit_code_error',
   ];
 
-  const childNames = new Set(themeNode.children.map((child) => child.name));
-  for (const component of requiredComponents) {
-    assert.ok(childNames.has(component), `Zellij missing component "${component}"`);
+  const components = new Map(themeNode.children.map((child) => [child.name, child]));
+  const requiredColors = ['base', 'background', 'emphasis_0', 'emphasis_1', 'emphasis_2', 'emphasis_3'];
+
+  for (const componentName of requiredComponents) {
+    assert.ok(components.has(componentName), `Zellij missing component "${componentName}"`);
+  }
+
+  for (const componentName of requiredComponents) {
+    const component = components.get(componentName);
+    const colors = new Map(component.children.map((child) => [child.name, child.arguments]));
+    for (const colorName of requiredColors) {
+      const channels = colors.get(colorName);
+      assert.ok(channels, `Zellij component "${componentName}" missing color "${colorName}"`);
+      assert.match(channels.join(' '), RGB_TRIPLET, `Zellij ${componentName}.${colorName} must be an RGB triplet`);
+      assert.ok(
+        channels.every((channel) => Number.parseInt(channel, 10) <= 255),
+        `Zellij ${componentName}.${colorName} channels must be between 0 and 255`,
+      );
+    }
   }
 }
 

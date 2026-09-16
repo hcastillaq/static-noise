@@ -21,7 +21,7 @@
       "format": "kdl",
       "source": "https://zellij.dev/documentation/themes",
       "nativeCommand": "zellij",
-      "nativeArgs": ["setup", "--check"]
+      "nativeArgs": ["--config", "/dev/null", "--config-dir", "{tempThemeDir}", "setup", "--check"]
     },
     "zellij-layout": {
       "name": "Zellij Layout",
@@ -31,7 +31,7 @@
       "format": "kdl",
       "source": "https://zellij.dev/documentation/creating-a-layout",
       "nativeCommand": "zellij",
-      "nativeArgs": ["setup", "--check"]
+      "nativeArgs": ["--config", "/dev/null", "setup", "--dump-layout", "{output}"]
     },
     "zjstatus": {
       "name": "zjstatus",
@@ -41,7 +41,7 @@
       "format": "zjstatus-config",
       "source": "https://github.com/dj95/zjstatus/wiki/3-%E2%80%90-Configuration",
       "nativeCommand": "zellij",
-      "nativeArgs": ["setup", "--check"]
+      "nativeArgs": ["--config", "/dev/null", "setup", "--dump-layout", "{output}"]
     },
     "neovim": {
       "name": "Neovim",

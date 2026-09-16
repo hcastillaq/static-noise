@@ -26,6 +26,24 @@ test('compatibility.json covers every compiler target exactly once', async () =>
   assert.equal(registeredTargets.size, 0, `compatibility.json has extra targets: ${[...registeredTargets].join(', ')}`);
 });
 
+test('zellij validator rejects incomplete component color declarations', () => {
+  const components = [
+    'text_unselected', 'text_selected', 'ribbon_unselected', 'ribbon_selected',
+    'table_title', 'table_cell_unselected', 'table_cell_selected',
+    'list_unselected', 'list_selected', 'frame_unselected', 'frame_selected',
+    'frame_highlight', 'exit_code_success', 'exit_code_error',
+  ];
+  const declarations = components.map((component) => {
+    const emphasis0 = component === 'text_unselected' ? '' : 'emphasis_0 3 3 3';
+    return `${component} {\nbase 1 1 1\nbackground 2 2 2\n${emphasis0}\nemphasis_1 4 4 4\nemphasis_2 5 5 5\nemphasis_3 6 6 6\n}`;
+  }).join('\n');
+
+  assert.throws(
+    () => validateZellijTheme(`themes {\nstatic-noise {\n${declarations}\n}\n}`),
+    /text_unselected.*emphasis_0/i,
+  );
+});
+
 test('negative fixtures fail target validators with descriptive errors', () => {
   assert.throws(() => validateNeovimLua('local x = { a = 1 b = 2 }'), /expected near 'b'/i);
   assert.throws(() => validateBottomConfig('[colors]\nborder_color = "#fff"\n'), /obsolete \[colors\]/);
