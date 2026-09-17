@@ -1,12 +1,25 @@
-# Releasing Static Noise
+# Publicar Static Noise
 
-1. Update `palette.json` and run `npm run build`.
-2. Run `npm test` and `npm run verify:native -- --strict` to ensure every target validates.
-3. Commit the source and generated `dist/` artifacts together.
-4. Create and push a matching tag, for example `v0.0.3`.
+Static Noise publica un contrato de tokens, no configuraciones para herramientas.
 
-Each tag workflow compares its consumer artifact with the preceding tag before dispatching the tag, version, and immutable commit SHA. VS Code is notified only when `dist/vscode/static-noise-color-theme.json` changes; Neovim is notified only when `dist/neovim/palette.lua` changes. Configure the PAT secret `STATIC_NOISE_SYNC_TOKEN` in this repository with access to both consumer repositories and permission to dispatch repository events.
+## Publicar una versión
 
-## Bootstrap
+1. Actualiza `palette.json`, `schemas/palette.schema.json` y la documentación relacionada.
+2. Ejecuta `npm test`.
+3. Revisa que `dist/` no haya cambiado; sus archivos son snapshots legacy congelados.
+4. Crea y publica un tag Git semántico, por ejemplo `v0.1.0`.
+5. Usa el commit del tag como referencia inmutable para los consumidores.
 
-The initial `v0.0.1` tag is a bootstrap release: it dispatches the canonical artifact to both consumers, which retain their own `0.0.1` version while recording the immutable SHA. Merge and tag those consumer bootstrap PRs as `v0.0.1`. Later Static Noise releases increment each consumer's PATCH version.
+Static Noise no despacha eventos, sincroniza repositorios ni abre PRs para adaptadores. Cada adaptador decide cuándo adoptar una versión y mantiene su propio snapshot, procedencia, conversión, compatibilidad, pruebas y release.
+
+## Versionado del contrato
+
+- **PATCH:** correcciones de documentación o validación sin cambiar el contrato de tokens.
+- **MINOR:** nuevos tokens opcionales o metadatos compatibles.
+- **MAJOR:** renombrar, retirar o cambiar la semántica de tokens existentes.
+
+Los consumidores deben registrar el tag y el commit SHA que copiaron. Si necesitan actualizar tokens, abren el cambio dentro de su propio repositorio y ejecutan allí sus pruebas específicas.
+
+## `dist/` legacy
+
+`dist/` se conserva temporalmente para consumidores que aún no migraron. No se regenera, no se valida y no recibe nuevas funcionalidades. Se eliminará cuando los consumidores pendientes hayan migrado a snapshots directos de `palette.json`.
