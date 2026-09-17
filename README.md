@@ -6,7 +6,7 @@ Fue creada para resolver un problema concreto: los entornos de terminal y los ed
 
 El proyecto publica un contrato de tokens. No genera configuraciones para herramientas concretas. Cada adaptador consume una versión de `palette.json` y decide cómo representar esa identidad dentro de sus propias capacidades.
 
-![Guía visual de Static Noise](docs/palette-preview.svg)
+![Guía visual de Static Noise](assets/palette-preview.svg)
 
 ## Identidad visual
 
