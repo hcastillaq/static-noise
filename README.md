@@ -1,73 +1,63 @@
-# Static Noise Palette
+# Static Noise
 
-> Sistema de diseño cromático oscuro de alto contraste, calibrado para terminales modernas y editores de código.
+Static Noise es una identidad visual cromática para herramientas de desarrollo.
 
-Static Noise es una paleta oscura y profunda con acentos en tonos pastel eléctricos (Cyan, Blue, Purple, Green, Orange, Red, Yellow), diseñada para eliminar la fatiga visual y mantener una jerarquía de código cristalina tanto de día como de noche.
+Fue creada para resolver un problema concreto: los entornos de terminal y los editores suelen acumular fondos negros, grises y acentos saturados sin una jerarquía común. Static Noise propone una superficie oscura, cálida y profunda, con acentos eléctricos de baja fatiga visual y suficiente contraste para distinguir estructura, foco, sintaxis y estados.
 
----
+El proyecto publica un contrato de tokens. No genera configuraciones para herramientas concretas. Cada adaptador consume una versión de `palette.json` y decide cómo representar esa identidad dentro de sus propias capacidades.
 
-## Paleta canónica
+![Guía visual de Static Noise](docs/palette-preview.svg)
 
-### Colores Base
+## Identidad visual
 
-| Token          | Hex       | Rol de interfaz                                            |
-| :------------- | :-------- | :--------------------------------------------------------- |
-| `void`         | `#0F1117` | Fondos ultra-profundos, barras laterales, fondo raíz Ghostty |
-| `surface`      | `#141720` | Superficies internas del editor y paneles terminales       |
-| `card`         | `#1A1E2B` | Tarjetas, líneas activas y menús flotantes                 |
-| `border`       | `#272C3E` | Delimitadores y bordes sutiles                             |
-| `borderStrong` | `#6E7588` | Delimitadores estructurales, separadores y bordes inactivos (>= 3:1) |
+Static Noise se basa en cinco principios:
 
-> **Migración:** `borderFocus` ha sido retirado. Los límites estructurales ahora usan `borderStrong`, mientras que el foco activo y la interacción quedan gobernados por `cyan` (`#72EAD5`).
+1. **Profundidad sin negro absoluto.** El lienzo parte de `semantic.surface.canvas` y construye superficies progresivas con `semantic.surface.base` y `semantic.surface.elevated`, evitando que toda la interfaz se convierta en una sola masa negra.
+2. **Foco eléctrico.** `semantic.interaction.focus` identifica el cursor, el foco activo y la interacción principal. Es un color de atención, no un relleno decorativo permanente.
+3. **Jerarquía cálida.** El texto principal usa blancos cálidos para reducir la dureza de los fondos fríos y conservar legibilidad prolongada.
+4. **Semántica estable.** Los acentos tienen funciones consistentes: azul para funciones, púrpura para keywords, verde para strings, amarillo para tipos, naranja para constantes y rojo para errores.
+5. **Estructura neutral.** Los bordes y separadores delimitan la interfaz sin competir con el foco. `semantic.outline.strong` está reservado para límites estructurales que deben seguir visibles en fondos oscuros o transparentes.
 
-### Texto
+La paleta está pensada para personas que pasan muchas horas alternando entre terminales, editores, multiplexores, herramientas Git y asistentes de desarrollo. Su objetivo no es maximizar el número de colores, sino hacer que cada color comunique algo distinto.
 
-| Token        | Hex       | Uso                               |
-| :----------- | :-------- | :-------------------------------- |
-| `foreground` | `#E6E2D6` | Texto principal (Warm White)      |
-| `muted`      | `#9299AE` | Texto secundario y etiquetas      |
-| `dim`        | `#62697B` | Comentarios e indicadores sutiles |
+## Contrato de tokens
 
-### Acentos Eléctricos
+- `palette.json` es la fuente canónica.
+- `schemas/palette.schema.json` define la estructura válida.
+- `docs/tokens.md` explica la identidad, los roles y las reglas de uso.
+- `docs/consumers.md` explica snapshots y responsabilidades de los consumidores.
+- `RELEASING.md` define versionado y publicación.
 
-| Token    | Hex       | Semántica                                           |
-| :------- | :-------- | :-------------------------------------------------- |
-| `cyan`   | `#72EAD5` | Cursor, foco activo, tags HTML/JSX, acento primario |
-| `blue`   | `#83BFFF` | Nombres de funciones, llamadas y métodos            |
-| `purple` | `#C2A7FF` | Keywords, modificadores, almacenamiento             |
-| `green`  | `#A3D98B` | Strings y literales de texto                        |
-| `yellow` | `#EDD071` | Tipos, clases e interfaces                          |
-| `orange` | `#F3A261` | Constantes, números y booleanos                     |
-| `red`    | `#EF7785` | Errores, alertas y caracteres eliminados            |
+## Uso de los colores
 
----
+Los adaptadores deben mapear los tokens por intención, no por coincidencia superficial de nombres:
 
-## Compilación multi-target
+| Necesidad visual | Token recomendado |
+| --- | --- |
+| Lienzo o fondo raíz | `semantic.surface.canvas` |
+| Superficie principal | `semantic.surface.base` |
+| Panel o contenedor elevado | `semantic.surface.elevated` |
+| Separador sutil | `semantic.outline.subtle` |
+| Límite estructural | `semantic.outline.strong` |
+| Cursor o elemento enfocado | `semantic.interaction.focus` |
+| Texto principal | `semantic.content.primary` |
+| Texto secundario | `semantic.content.secondary` o `semantic.content.muted` |
+| Funciones y métodos | `domains.syntax.function` |
+| Keywords y modificadores | `domains.syntax.keyword` |
+| Strings y literales | `domains.syntax.string` |
+| Tipos e interfaces | `domains.syntax.type` |
+| Constantes y números | `domains.syntax.constant` |
+| Errores y eliminaciones | `domains.syntax.error` o `domains.diff.removed` |
 
-Este repositorio actúa como el compilador central. Leyendo el archivo `palette.json`, genera automáticamente los temas listos para usar en la carpeta `dist/`:
+Los adaptadores deben consumir primero `semantic` y `domains`. `primitives` sirve para referencias internas y `projections` solo para compatibilidad. No se deben introducir colores arbitrarios dentro de un adaptador para resolver una diferencia visual local; primero hay que decidir si la necesidad pertenece al contrato común o únicamente a la herramienta.
+
+## Desarrollo
 
 ```bash
-npm run build
 npm test
-npm run verify:native
 ```
 
-### Targets Generados
-
-- **Ghostty:** `dist/ghostty/static-noise`
-- **Zellij:** `dist/zellij/static-noise.kdl` y `dist/zellij/layouts/default.kdl`
-- **Neovim:** `dist/neovim/palette.lua`
-- **VS Code:** `dist/vscode/static-noise-color-theme.json`
-- **Fish/FZF:** `dist/fish/static-noise-colors.fish`
-- **Starship:** `dist/starship/starship.toml` (completo)
-- **Starship palette:** `dist/starship/static-noise-palette.toml`
-- **Bottom:** `dist/bottom/static-noise-colors.toml`
-- **Lazygit:** `dist/lazygit/static-noise-theme.yml`
-- **Git Delta:** `dist/delta/static-noise.gitconfig`
-- **Pi:** `dist/pi/static-noise-theme.json`
-- **JSON minificado:** `dist/palette.min.json`
-
----
+La suite usa Vitest y valida únicamente el contrato de Static Noise: estructura, roles, versiones, formato hexadecimal y contraste. No requiere Ghostty, Zellij, Neovim, VS Code ni otros binarios externos.
 
 ## Licencia
 

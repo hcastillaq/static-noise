@@ -1,158 +1,58 @@
 # AGENTS.md — Contexto para asistentes de IA
 
-## Propósito del proyecto
+## Propósito
 
-**Static Noise** es un sistema de diseño cromático oscuro de alto contraste. Mantiene una paleta canónica y la compila a configuraciones para terminales, editores y herramientas de desarrollo.
+Static Noise es un contrato versionado de tokens cromáticos oscuros de alto contraste. Este repositorio no compila temas ni mantiene adaptadores para herramientas externas.
 
-El repositorio principal es un **compilador de temas multi-target**: la fuente de verdad es `palette.json` y los artefactos consumibles se generan en `dist/`.
+## Regla principal
 
-## Regla principal para la IA
+Antes de cambiar colores, tokens o semántica:
 
-Antes de cambiar cualquier color, token, nombre o semántica:
+1. Leer `palette.json` y `schemas/palette.schema.json`.
+2. Actualizar el contrato y su documentación, no archivos de adaptadores.
+3. Ejecutar `npm test`.
+4. Ejecutar `npm test` y revisar que el cambio solo afecte el contrato de tokens.
 
-1. Leer `palette.json`.
-2. Revisar las plantillas afectadas en `templates/`.
-3. Actualizar la fuente (`palette.json`) o la plantilla correspondiente, nunca únicamente un archivo generado.
-4. Ejecutar `npm run build`.
-5. Verificar que los cambios generados en `dist/` sean los esperados.
+## Fuente de verdad
 
-No editar manualmente archivos de `dist/`: son artefactos derivados y se sobrescriben durante la compilación.
+- `palette.json`: tokens canónicos.
+- `schemas/palette.schema.json`: contrato estructural.
+- `src/validate.mjs`: validación propia del contrato.
+- `docs/`: semántica, versionado y guía para consumidores.
 
-## Fuente de verdad: `palette.json`
+Todo color debe ser hexadecimal de seis dígitos y conservar la semántica documentada. `borderStrong` es el borde estructural; `cyan` es foco e interacción activa.
 
-La estructura actual es:
+## Responsabilidad de consumidores
 
-- `colors.base`: fondos, superficies, tarjetas, bordes y selección.
-- `colors.text`: texto principal, suave, atenuado y tenue.
-- `colors.accents`: colores semánticos eléctricos.
-- `colors.dim`: variantes oscuras de los acentos.
-- `colors.diff`: colores para líneas añadidas/eliminadas y sus énfasis.
-- `ansi`: colores ANSI normales y brillantes.
+Cada adaptador externo consume un snapshot de `palette.json` desde un tag Git inmutable y mantiene su propia conversión, compatibilidad, pruebas, procedencia y releases. Static Noise no conoce, lista, valida, sincroniza ni publica adaptadores.
 
-Colores base principales:
-
-- `void`: `#0F1117`
-- `surface`: `#141720`
-- `card`: `#1A1E2B`
-- `border`: `#272C3E`
-- `borderStrong`: `#6E7588` (delimitadores estructurales, >= 3:1 contra `void` y fondos compuestos)
-- `foreground`: `#E6E2D6`
-- `muted`: `#9299AE`
-- `dim`: `#62697B`
-
-Acentos y semántica:
-
-- `cyan`: foco, cursor y acento primario.
-- `blue`: funciones, llamadas y métodos.
-- `purple`: keywords, modificadores y almacenamiento.
-- `green`: strings y literales de texto.
-- `yellow`: tipos, clases e interfaces.
-- `orange`: constantes, números y booleanos.
-- `red`: errores, alertas y elementos eliminados.
-- `magenta`: acento adicional, incluido ANSI bright magenta.
-
-Conservar la semántica y el contraste al introducir o modificar tokens. Evitar agregar colores arbitrarios que no estén justificados por una necesidad semántica.
-
-## Arquitectura
-
-- `palette.json`: metadatos y tokens canónicos.
-- `templates/*.template`: plantillas por producto/formato. Usan placeholders `{{ruta.anidada}}`.
-- `src/build.js`: compilador Node.js sin dependencias externas.
-- `dist/`: archivos generados y publicados.
-- `README.md`: documentación pública y tabla de colores.
-- `RELEASING.md`: proceso de publicación y sincronización.
-- `compatibility.json`: matriz de compatibilidad con versiones soportadas y validadores por target.
-- `.github/workflows/verify.yml`: valida dependencias, compila, corre tests y smoke checks nativos, y falla si `dist/` no está actualizado.
-- `.github/workflows/dispatch-vscode.yml`: sincroniza el artefacto de VS Code al crear tags `v*`.
-- `.github/workflows/dispatch-neovim.yml`: sincroniza el artefacto de Neovim al crear tags `v*`.
-
-## Targets generados
-
-`src/build.js` genera:
-
-- Ghostty: `dist/ghostty/static-noise`
-- Zellij: `dist/zellij/static-noise.kdl` y `dist/zellij/layouts/default.kdl`
-- Neovim: `dist/neovim/palette.lua`
-- VS Code: `dist/vscode/static-noise-color-theme.json`
-- Fish/FZF: `dist/fish/static-noise-colors.fish`
-- Starship: `dist/starship/starship.toml` y `dist/starship/static-noise-palette.toml`
-- Bottom: `dist/bottom/static-noise-colors.toml`
-- Lazygit: `dist/lazygit/static-noise-theme.yml`
-- Git Delta: `dist/delta/static-noise.gitconfig`
-- Pi: `dist/pi/static-noise-theme.json`
-- JSON minificado: `dist/palette.min.json`
-
-El compilador además valida que no queden placeholders `{{...}}` y que los targets JSON sean JSON válido.
-
-## Flujo de trabajo esperado
-
-### Ramas y estrategia Git
-
-- **`main`**: rama protegida y de producción. Solo recibe merges listos para release o tags oficiales. No se trabaja directamente en `main` ni se envían PRs directos sin pasar por integración.
-- **`develop`**: punto medio de integración continua y base para nuevas características o refactors. Todas las ramas de trabajo (`feature/*`, `refactor/*`, `fix/*`) se abren desde `develop` y se mergean hacia `develop` mediante Pull Request.
-- **Flujo habitual:**
-  1. Partir desde `develop` actualizado: `git checkout -b feature/nombre develop` (o `refactor/*`).
-  2. Implementar, validar localmente (`npm test`, `npm run verify:native`) y compilar.
-  3. Abrir PR hacia `develop`.
-  4. La promoción a `main` se realiza desde `develop` cuando el conjunto de cambios está estabilizado y preparado para un tag de versión.
-
-### Cambios de paleta o temas
+## Verificación
 
 ```bash
-npm run build
 npm test
-npm run verify:native
-git diff -- palette.json templates/ dist/
 ```
 
-Si se modifica `palette.json`, deben incluirse en el mismo cambio los artefactos regenerados de `dist/`. Si se modifica una plantilla, revisar el target completo y regenerar todos los artefactos.
+Vitest valida únicamente el contrato de tokens: esquema, versión, formato hexadecimal, roles semánticos y contraste. No se requieren binarios externos.
 
-### Verificación
+## Flujo Git
 
-El proyecto cuenta con validación estricta y suite de tests determinista:
+- `main` es producción; no trabajar directamente sobre ella.
+- Las ramas de trabajo parten de `develop` y abren PR hacia `develop`.
+- Mantener cambios pequeños y documentar cambios públicos en `README.md` y `docs/`.
 
-```bash
-npm run build
-npm test
-npm run verify:native -- --strict
-git diff --exit-code -- dist
-```
+## Releases
 
-1. `npm run build`: compilador transaccional en memoria; no modifica `dist/` si algún target falla.
-2. `npm test`: suite de pruebas (esquemas, contrastes, sintaxis Lua/Fish/TOML/YAML/JSON/KDL, determinismo).
-3. `npm run verify:native -- --strict`: invoca los binarios nativos oficiales de cada herramienta configurada en `compatibility.json`.
-4. `git diff --exit-code -- dist`: confirma que el contenido generado está committed exactamente como lo produce el compilador.
+- Cambiar `palette.json`, esquema y documentación de forma coherente.
+- Ejecutar `npm test`.
+- Crear un tag semántico inmutable.
+- No generar configuraciones de herramientas ni despachar sincronizaciones a otros repositorios.
 
-### Releases
+## Checklist
 
-- Cambiar `palette.json`.
-- Ejecutar `npm run build`.
-- Committear fuente y `dist/` juntos.
-- Crear y publicar un tag compatible, por ejemplo `v0.0.1`.
-- La versión inicial `v0.0.1` es un bootstrap para VS Code y Neovim.
-- Releases posteriores incrementan el PATCH de los consumidores.
-- Las sincronizaciones usan `STATIC_NOISE_SYNC_TOKEN`; nunca exponer ni hardcodear secretos.
-
-## Convenciones de implementación
-
-- Usar Node.js moderno y APIs nativas; el proyecto no requiere dependencias de runtime.
-- Mantener cambios pequeños y enfocados.
-- Respetar el formato existente de cada target y de cada plantilla.
-- Usar nombres de tokens consistentes con la jerarquía de `palette.json`.
-- No introducir lógica específica de un target en `palette.json`; la semántica común va en la paleta y la representación específica va en su plantilla.
-- No modificar workflows, proceso de release o artefactos publicados sin revisar sus efectos en los repositorios consumidores.
-- Documentar en `README.md` los tokens públicos o cambios de semántica relevantes.
-
-## Checklist para asistentes de IA
-
-- [ ] Trabajé sobre la rama de características o `develop`, no directamente sobre `main`.
-- [ ] Identifiqué la fuente de verdad y los targets afectados.
-- [ ] No edité `dist/` como fuente primaria.
-- [ ] Ejecuté `npm run build` y `npm test`.
-- [ ] Verifiqué con `npm run verify:native`.
-- [ ] No quedaron placeholders sin resolver ni tokens obsoletos (`borderFocus`).
-- [ ] Los JSON, KDL, TOML, YAML y Lua generados son válidos.
-- [ ] `git diff --exit-code -- dist` pasa después de compilar.
-- [ ] Revisé que el contraste y la semántica de los colores no se hayan degradado (mínimo 3:1 para `borderStrong`).
-- [ ] Actualicé documentación si cambió la API o semántica pública.
+- [ ] Trabajé sobre una rama de características o `develop`.
+- [ ] El cambio pertenece al contrato de tokens, no a un adaptador.
+- [ ] El cambio pertenece al contrato de tokens.
+- [ ] `npm test` pasa con Vitest.
+- [ ] No hay colores inválidos ni tokens obsoletos como `borderFocus`.
+- [ ] Actualicé documentación si cambió el contrato público.
 - [ ] No incluí secretos ni cambios accidentales.

@@ -1,13 +1,18 @@
 {
   "name": "@hcastillaq/static-noise",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "type": "module",
-  "description": "High-contrast dark design system and multi-target palette compiler",
-  "main": "dist/palette.min.json",
+  "engines": {
+    "node": ">=24"
+  },
+  "description": "High-contrast dark design system and canonical color token contract",
+  "main": "palette.json",
+  "exports": {
+    ".": "./palette.json",
+    "./schema": "./schemas/palette.schema.json"
+  },
   "scripts": {
-    "build": "node src/build.js",
-    "test": "node --test",
-    "verify:native": "node src/verify-native.mjs"
+    "test": "vitest run"
   },
   "keywords": [
     "theme",
@@ -22,9 +27,7 @@
   "author": "Hernan Castilla <hcastillaq@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@iarna/toml": "^2.2.5",
     "ajv": "^8.20.0",
-    "luaparse": "^0.3.1",
-    "yaml": "^2.9.1"
+    "vitest": "^3.2.4"
   }
 }
