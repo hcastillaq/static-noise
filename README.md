@@ -59,10 +59,6 @@ npm test
 
 La suite usa Vitest y valida únicamente el contrato de Static Noise: estructura, roles, versiones, formato hexadecimal y contraste. No requiere Ghostty, Zellij, Neovim, VS Code ni otros binarios externos.
 
-## Artefactos legacy
-
-`dist/` contiene snapshots congelados para consumidores que todavía están migrando. No se regeneran ni reciben nuevas funcionalidades. Los adaptadores nuevos deben consumir una versión etiquetada de `palette.json` directamente.
-
 ## Licencia
 
 Publicado bajo la licencia MIT. Libre para uso personal, distribución y modificaciones.

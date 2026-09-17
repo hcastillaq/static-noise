@@ -11,7 +11,7 @@ Antes de cambiar colores, tokens o semántica:
 1. Leer `palette.json` y `schemas/palette.schema.json`.
 2. Actualizar el contrato y su documentación, no archivos de adaptadores.
 3. Ejecutar `npm test`.
-4. No regenerar ni modificar `dist/`: son snapshots legacy congelados.
+4. Ejecutar `npm test` y revisar que el cambio solo afecte el contrato de tokens.
 
 ## Fuente de verdad
 
@@ -25,8 +25,6 @@ Todo color debe ser hexadecimal de seis dígitos y conservar la semántica docum
 ## Responsabilidad de consumidores
 
 Cada adaptador externo consume un snapshot de `palette.json` desde un tag Git inmutable y mantiene su propia conversión, compatibilidad, pruebas, procedencia y releases. Static Noise no conoce, lista, valida, sincroniza ni publica adaptadores.
-
-`dist/` solo existe temporalmente para consumidores en migración. No tiene generador ni validación y no debe recibir cambios nuevos.
 
 ## Verificación
 
@@ -47,13 +45,13 @@ Vitest valida únicamente el contrato de tokens: esquema, versión, formato hexa
 - Cambiar `palette.json`, esquema y documentación de forma coherente.
 - Ejecutar `npm test`.
 - Crear un tag semántico inmutable.
-- No regenerar `dist/` ni despachar sincronizaciones a otros repositorios.
+- No generar configuraciones de herramientas ni despachar sincronizaciones a otros repositorios.
 
 ## Checklist
 
 - [ ] Trabajé sobre una rama de características o `develop`.
 - [ ] El cambio pertenece al contrato de tokens, no a un adaptador.
-- [ ] No modifiqué `dist/` como fuente primaria.
+- [ ] El cambio pertenece al contrato de tokens.
 - [ ] `npm test` pasa con Vitest.
 - [ ] No hay colores inválidos ni tokens obsoletos como `borderFocus`.
 - [ ] Actualicé documentación si cambió el contrato público.
