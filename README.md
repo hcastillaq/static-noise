@@ -26,7 +26,6 @@ La paleta está pensada para personas que pasan muchas horas alternando entre te
 - `schemas/palette.schema.json` define la estructura válida.
 - `docs/tokens.md` explica la identidad, los roles y las reglas de uso.
 - `docs/consumers.md` explica snapshots y responsabilidades de los consumidores.
-- `docs/adapter-authoring.md` guía el mapeo semántico para autores y agentes de IA.
 - `RELEASING.md` define versionado y publicación.
 
 ## Uso de los colores
