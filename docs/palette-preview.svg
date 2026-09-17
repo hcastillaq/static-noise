@@ -44,7 +44,7 @@
     <rect x="1204" y="452" width="72" height="60" rx="7" fill="#EF7785"/><text x="1213" y="479" fill="#0F1117">red</text><text x="1213" y="498" font-size="10" fill="#0F1117">error</text>
   </g>
 
-  <text x="56" y="650" class="section">DIM VARIANTS · LOWER INTENSITY, SAME MEANING</text>
+  <text x="56" y="562" class="section">DIM VARIANTS · LOWER INTENSITY, SAME MEANING</text>
   <g class="chip">
     <rect x="56" y="580" width="145" height="52" rx="7" fill="#193C3B"/><text x="72" y="610" fill="#72EAD5">cyan.dim</text>
     <rect x="213" y="580" width="145" height="52" rx="7" fill="#20344D"/><text x="229" y="610" fill="#83BFFF">blue.dim</text>
@@ -78,6 +78,6 @@
     <circle cx="76" cy="1012" r="16" fill="#141720"/><circle cx="124" cy="1012" r="16" fill="#EF7785"/><circle cx="172" cy="1012" r="16" fill="#A3D98B"/><circle cx="220" cy="1012" r="16" fill="#EDD071"/><circle cx="268" cy="1012" r="16" fill="#83BFFF"/><circle cx="316" cy="1012" r="16" fill="#C2A7FF"/><circle cx="364" cy="1012" r="16" fill="#72EAD5"/><circle cx="412" cy="1012" r="16" fill="#E6E2D6"/>
     <text x="56" y="1062" class="small">black · red · green · yellow · blue · magenta · cyan · white</text>
   </g>
-  <line x1="56" y1="1018" x2="1276" y2="1018" stroke="#272C3E"/>
+  <line x1="56" y1="1090" x2="1276" y2="1090" stroke="#272C3E"/>
   <text x="56" y="1140" class="small">Dark depth · warm content · electric accents · stable semantic roles</text>
 </svg>
