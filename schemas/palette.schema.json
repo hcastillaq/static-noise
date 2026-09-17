@@ -1,0 +1,31 @@
+{
+  "$id": "https://github.com/hcastillaq/static-noise/blob/main/schemas/palette.schema.json",
+  "title": "Static Noise Palette",
+  "type": "object",
+  "required": ["name", "version", "description", "colors", "ansi"],
+  "properties": {
+    "name": { "const": "Static Noise" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "description": { "type": "string", "minLength": 1 },
+    "colors": {
+      "type": "object",
+      "required": ["base", "text", "accents", "dim", "diff"],
+      "additionalProperties": false,
+      "properties": {
+        "base": { "$ref": "#/$defs/colorMap" },
+        "text": { "$ref": "#/$defs/colorMap" },
+        "accents": { "$ref": "#/$defs/colorMap" },
+        "dim": { "$ref": "#/$defs/colorMap" },
+        "diff": { "$ref": "#/$defs/colorMap" }
+      }
+    },
+    "ansi": { "$ref": "#/$defs/colorMap" }
+  },
+  "$defs": {
+    "colorMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" }
+    }
+  }
+}

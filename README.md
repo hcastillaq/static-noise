@@ -1,73 +1,28 @@
 # Static Noise Palette
 
-> Sistema de diseño cromático oscuro de alto contraste, calibrado para terminales modernas y editores de código.
+> Sistema de tokens cromáticos oscuro de alto contraste para interfaces de desarrollo.
 
-Static Noise es una paleta oscura y profunda con acentos en tonos pastel eléctricos (Cyan, Blue, Purple, Green, Orange, Red, Yellow), diseñada para eliminar la fatiga visual y mantener una jerarquía de código cristalina tanto de día como de noche.
+Static Noise publica una identidad visual mediante un contrato JSON versionado. El repositorio no compila temas para herramientas concretas: cada adaptador consume un snapshot de `palette.json` desde un tag Git y decide cómo convertirlo, probarlo y publicarlo.
 
----
+## Contrato de tokens
 
-## Paleta canónica
+- `palette.json`: fuente canónica y único contrato de colores.
+- `schemas/palette.schema.json`: esquema público del contrato.
+- `docs/tokens.md`: semántica de roles y contraste.
+- `docs/versioning.md`: reglas de versiones y tags.
+- `docs/consumers.md`: guía para consumidores y adaptadores.
 
-### Colores Base
-
-| Token          | Hex       | Rol de interfaz                                            |
-| :------------- | :-------- | :--------------------------------------------------------- |
-| `void`         | `#0F1117` | Fondos ultra-profundos, barras laterales, fondo raíz Ghostty |
-| `surface`      | `#141720` | Superficies internas del editor y paneles terminales       |
-| `card`         | `#1A1E2B` | Tarjetas, líneas activas y menús flotantes                 |
-| `border`       | `#272C3E` | Delimitadores y bordes sutiles                             |
-| `borderStrong` | `#6E7588` | Delimitadores estructurales, separadores y bordes inactivos (>= 3:1) |
-
-> **Migración:** `borderFocus` ha sido retirado. Los límites estructurales ahora usan `borderStrong`, mientras que el foco activo y la interacción quedan gobernados por `cyan` (`#72EAD5`).
-
-### Texto
-
-| Token        | Hex       | Uso                               |
-| :----------- | :-------- | :-------------------------------- |
-| `foreground` | `#E6E2D6` | Texto principal (Warm White)      |
-| `muted`      | `#9299AE` | Texto secundario y etiquetas      |
-| `dim`        | `#62697B` | Comentarios e indicadores sutiles |
-
-### Acentos Eléctricos
-
-| Token    | Hex       | Semántica                                           |
-| :------- | :-------- | :-------------------------------------------------- |
-| `cyan`   | `#72EAD5` | Cursor, foco activo, tags HTML/JSX, acento primario |
-| `blue`   | `#83BFFF` | Nombres de funciones, llamadas y métodos            |
-| `purple` | `#C2A7FF` | Keywords, modificadores, almacenamiento             |
-| `green`  | `#A3D98B` | Strings y literales de texto                        |
-| `yellow` | `#EDD071` | Tipos, clases e interfaces                          |
-| `orange` | `#F3A261` | Constantes, números y booleanos                     |
-| `red`    | `#EF7785` | Errores, alertas y caracteres eliminados            |
-
----
-
-## Compilación multi-target
-
-Este repositorio actúa como el compilador central. Leyendo el archivo `palette.json`, genera automáticamente los temas listos para usar en la carpeta `dist/`:
+## Desarrollo
 
 ```bash
-npm run build
 npm test
-npm run verify:native
 ```
 
-### Targets Generados
+La suite usa Vitest y valida únicamente el contrato de Static Noise: estructura, versiones, formato hexadecimal, semántica y contraste. No requiere Ghostty, Zellij, Neovim, VS Code ni otros binarios externos.
 
-- **Ghostty:** `dist/ghostty/static-noise`
-- **Zellij:** `dist/zellij/static-noise.kdl` y `dist/zellij/layouts/default.kdl`
-- **Neovim:** `dist/neovim/palette.lua`
-- **VS Code:** `dist/vscode/static-noise-color-theme.json`
-- **Fish/FZF:** `dist/fish/static-noise-colors.fish`
-- **Starship:** `dist/starship/starship.toml` (completo)
-- **Starship palette:** `dist/starship/static-noise-palette.toml`
-- **Bottom:** `dist/bottom/static-noise-colors.toml`
-- **Lazygit:** `dist/lazygit/static-noise-theme.yml`
-- **Git Delta:** `dist/delta/static-noise.gitconfig`
-- **Pi:** `dist/pi/static-noise-theme.json`
-- **JSON minificado:** `dist/palette.min.json`
+## Artefactos legacy
 
----
+`dist/` contiene snapshots congelados para consumidores que todavía están migrando. No se regeneran ni reciben nuevas funcionalidades. Los adaptadores nuevos deben consumir una versión etiquetada de `palette.json` directamente.
 
 ## Licencia
 

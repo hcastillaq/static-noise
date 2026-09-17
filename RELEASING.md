@@ -1,12 +1,14 @@
 # Releasing Static Noise
 
-1. Update `palette.json` and run `npm run build`.
-2. Run `npm test` and `npm run verify:native -- --strict` to ensure every target validates.
-3. Commit the source and generated `dist/` artifacts together.
-4. Create and push a matching tag, for example `v0.0.3`.
+1. Actualiza `palette.json`, su esquema y la documentación cuando cambie el contrato.
+2. Ejecuta `npm test`.
+3. Publica un tag Git semántico que los adaptadores puedan fijar por tag y commit.
+4. No regeneres ni publiques cambios en `dist/`; esos archivos son snapshots legacy congelados.
 
-Each tag workflow compares its consumer artifact with the preceding tag before dispatching the tag, version, and immutable commit SHA. VS Code is notified only when `dist/vscode/static-noise-color-theme.json` changes; Neovim is notified only when `dist/neovim/palette.lua` changes. Configure the PAT secret `STATIC_NOISE_SYNC_TOKEN` in this repository with access to both consumer repositories and permission to dispatch repository events.
+## Versionado
 
-## Bootstrap
+- PATCH: correcciones de documentación o validación sin cambiar el contrato de tokens.
+- MINOR: nuevos tokens opcionales o metadatos compatibles.
+- MAJOR: renombrar, retirar o cambiar la semántica de tokens existentes.
 
-The initial `v0.0.1` tag is a bootstrap release: it dispatches the canonical artifact to both consumers, which retain their own `0.0.1` version while recording the immutable SHA. Merge and tag those consumer bootstrap PRs as `v0.0.1`. Later Static Noise releases increment each consumer's PATCH version.
+Static Noise no despacha eventos ni abre sincronizaciones para consumidores. Cada adaptador decide cuándo adoptar un tag y mantiene su propia procedencia, conversión, compatibilidad, pruebas y release.
