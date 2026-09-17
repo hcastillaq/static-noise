@@ -1,16 +1,18 @@
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { compositeHex, contrastRatio } from '../src/validate.mjs';
+import { contrastRatio } from './helpers/palette.mjs';
 
-const borderStrong = '#6E7588';
-const voidColor = '#0F1117';
+const root = path.resolve(import.meta.dirname, '..');
+const palette = JSON.parse(await readFile(path.join(root, 'palette.json'), 'utf8'));
+const { borderStrong, void: voidColor } = palette.colors.base;
 
 describe('token contrast', () => {
-  it('keeps borderStrong at or above 3:1 against required backgrounds', () => {
+  it('keeps the structural border at or above 3:1 against required backgrounds', () => {
     const backgrounds = [
       voidColor,
-      compositeHex(voidColor, '#000000', 0.9),
-      compositeHex(voidColor, '#808080', 0.9),
-      compositeHex(voidColor, '#FFFFFF', 0.9),
+      palette.colors.base.surface,
+      palette.colors.base.card,
     ];
     for (const background of backgrounds) expect(contrastRatio(borderStrong, background)).toBeGreaterThanOrEqual(3);
   });

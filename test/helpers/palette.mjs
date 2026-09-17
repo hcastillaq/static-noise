@@ -1,5 +1,5 @@
 import Ajv from 'ajv';
-import schema from '../schemas/palette.schema.json' with { type: 'json' };
+import schema from '../../schemas/palette.schema.json' with { type: 'json' };
 
 const HEX_COLOR = /^#[0-9A-Fa-f]{6}$/;
 
@@ -20,12 +20,10 @@ export function contrastRatio(first, second) {
   return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 }
 
-export function compositeHex(foreground, background, alpha) {
-  if (alpha < 0 || alpha > 1) throw new Error(`Alpha must be between 0 and 1: ${alpha}`);
-  const foregroundRgb = parseHex(foreground);
-  const backgroundRgb = parseHex(background);
-  const channels = foregroundRgb.map((channel, index) => Math.round(channel * alpha + backgroundRgb[index] * (1 - alpha)));
-  return `#${channels.map((channel) => channel.toString(16).padStart(2, '0')).join('').toUpperCase()}`;
+export function colorValues(value, path = []) {
+  if (typeof value === 'string' && value.startsWith('#')) return [{ path: path.join('.'), value }];
+  if (!value || typeof value !== 'object') return [];
+  return Object.entries(value).flatMap(([key, child]) => colorValues(child, [...path, key]));
 }
 
 export function validatePalette(palette, packageJson = palette) {
@@ -33,6 +31,7 @@ export function validatePalette(palette, packageJson = palette) {
   if (!ajv.validate(schema, palette)) throw new Error(`Palette schema validation failed: ${ajv.errorsText()}`);
   if (palette.version !== packageJson.version) throw new Error(`Palette version ${palette.version} does not match package version ${packageJson.version}`);
   if (!palette.colors.base.borderStrong || 'borderFocus' in palette.colors.base) throw new Error('Palette must expose borderStrong and must not expose borderFocus');
-  if (contrastRatio(palette.colors.base.borderStrong, palette.colors.base.void) < 3) throw new Error('borderStrong must reach 3:1 contrast against void');
+  const invalidColors = colorValues(palette).filter(({ value }) => !HEX_COLOR.test(value));
+  if (invalidColors.length) throw new Error(`Invalid colors: ${invalidColors.map(({ path }) => path).join(', ')}`);
   return true;
 }
