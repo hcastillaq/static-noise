@@ -25,7 +25,8 @@ La paleta está pensada para personas que pasan muchas horas alternando entre te
 - `palette.json` es la fuente canónica.
 - `schemas/palette.schema.json` define la estructura válida.
 - `docs/tokens.md` explica la identidad, los roles y las reglas de uso.
-- `docs/consumers.md` explica cómo crear adaptadores independientes.
+- `docs/consumers.md` explica snapshots y responsabilidades de los consumidores.
+- `docs/adapter-authoring.md` guía el mapeo semántico para autores y agentes de IA.
 - `RELEASING.md` define versionado y publicación.
 
 ## Uso de los colores
@@ -34,22 +35,24 @@ Los adaptadores deben mapear los tokens por intención, no por coincidencia supe
 
 | Necesidad visual | Token recomendado |
 | --- | --- |
-| Lienzo o fondo raíz | `colors.base.void` |
-| Superficie de aplicación | `colors.base.surface` |
-| Panel, tarjeta o popup | `colors.base.card` |
-| Separador sutil | `colors.base.border` |
-| Límite estructural | `colors.base.borderStrong` |
-| Cursor o elemento enfocado | `colors.accents.cyan` |
-| Texto principal | `colors.text.foreground` |
-| Texto secundario | `colors.text.soft` o `colors.text.muted` |
-| Funciones y métodos | `colors.accents.blue` |
-| Keywords y modificadores | `colors.accents.purple` |
-| Strings y literales | `colors.accents.green` |
-| Tipos e interfaces | `colors.accents.yellow` |
-| Constantes y números | `colors.accents.orange` |
-| Errores y eliminaciones | `colors.accents.red` |
+| Necesidad visual | Token recomendado |
+| --- | --- |
+| Lienzo o fondo raíz | `semantic.surface.canvas` |
+| Superficie principal | `semantic.surface.base` |
+| Panel o contenedor elevado | `semantic.surface.elevated` |
+| Separador sutil | `semantic.outline.subtle` |
+| Límite estructural | `semantic.outline.strong` |
+| Cursor o elemento enfocado | `semantic.interaction.focus` |
+| Texto principal | `semantic.content.primary` |
+| Texto secundario | `semantic.content.secondary` o `semantic.content.muted` |
+| Funciones y métodos | `domains.syntax.function` |
+| Keywords y modificadores | `domains.syntax.keyword` |
+| Strings y literales | `domains.syntax.string` |
+| Tipos e interfaces | `domains.syntax.type` |
+| Constantes y números | `domains.syntax.constant` |
+| Errores y eliminaciones | `domains.syntax.error` o `domains.diff.removed` |
 
-Las variantes de `colors.dim` sirven para estados secundarios del mismo acento. `colors.diff` se reserva para representar cambios añadidos y eliminados. No se deben introducir colores arbitrarios dentro de un adaptador para resolver una diferencia visual local; primero hay que decidir si la necesidad pertenece al contrato común o únicamente a la herramienta.
+Los adaptadores deben consumir primero `semantic` y `domains`. `primitives` sirve para referencias internas y `projections` solo para compatibilidad. No se deben introducir colores arbitrarios dentro de un adaptador para resolver una diferencia visual local; primero hay que decidir si la necesidad pertenece al contrato común o únicamente a la herramienta.
 
 ## Desarrollo
 
