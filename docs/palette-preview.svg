@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
-  <title id="title">Static Noise visual guide</title>
-  <desc id="desc">Static Noise dark surfaces, text hierarchy, semantic accents, borders and diff states.</desc>
+  <title id="title">Static Noise semantic token guide</title>
+  <desc id="desc">Static Noise surfaces, content hierarchy, semantic interaction and development domains.</desc>
   <rect width="1200" height="760" fill="#0F1117"/>
   <style>
     text { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
@@ -10,40 +10,38 @@
     .section { font-size: 13px; font-weight: 700; letter-spacing: 2px; fill: #72EAD5; }
     .chip { font-size: 13px; font-weight: 700; }
   </style>
-
   <text x="56" y="62" class="title">STATIC NOISE</text>
-  <text x="56" y="88" class="muted">High-contrast dark design tokens for development tools</text>
+  <text x="56" y="88" class="muted">Semantic identity tokens for development tools</text>
 
-  <text x="56" y="140" class="section">DEPTH</text>
-  <rect x="56" y="158" width="240" height="88" rx="8" fill="#141720" stroke="#272C3E"/>
-  <text x="76" y="190" class="label">surface</text><text x="76" y="214" class="muted">#141720</text>
-  <rect x="320" y="158" width="240" height="88" rx="8" fill="#1A1E2B" stroke="#6E7588"/>
-  <text x="340" y="190" class="label">card</text><text x="340" y="214" class="muted">#1A1E2B</text>
-  <rect x="584" y="158" width="240" height="88" rx="8" fill="#222738" stroke="#6E7588"/>
-  <text x="604" y="190" class="label">cardHover</text><text x="604" y="214" class="muted">#222738</text>
-  <text x="848" y="190" class="label">borderStrong</text><line x1="848" y1="214" x2="1088" y2="214" stroke="#6E7588" stroke-width="4"/><text x="848" y="238" class="muted">#6E7588</text>
+  <text x="56" y="140" class="section">SEMANTIC SURFACES</text>
+  <rect x="56" y="158" width="240" height="88" rx="8" fill="#0F1117" stroke="#272C3E"/>
+  <text x="76" y="190" class="label">surface.canvas</text><text x="76" y="214" class="muted">#0F1117</text>
+  <rect x="320" y="158" width="240" height="88" rx="8" fill="#141720" stroke="#272C3E"/>
+  <text x="340" y="190" class="label">surface.base</text><text x="340" y="214" class="muted">#141720</text>
+  <rect x="584" y="158" width="240" height="88" rx="8" fill="#1A1E2B" stroke="#6E7588"/>
+  <text x="604" y="190" class="label">surface.elevated</text><text x="604" y="214" class="muted">#1A1E2B</text>
+  <text x="848" y="190" class="label">outline.strong</text><line x1="848" y1="214" x2="1088" y2="214" stroke="#6E7588" stroke-width="4"/><text x="848" y="238" class="muted">#6E7588</text>
 
-  <text x="56" y="300" class="section">TEXT HIERARCHY</text>
+  <text x="56" y="300" class="section">SEMANTIC CONTENT</text>
   <rect x="56" y="320" width="1032" height="88" rx="8" fill="#141720" stroke="#272C3E"/>
-  <text x="80" y="355" font-size="20" fill="#E6E2D6">foreground</text>
-  <text x="300" y="355" font-size="20" fill="#C9C8C2">soft</text>
-  <text x="450" y="355" font-size="20" fill="#9299AE">muted</text>
-  <text x="620" y="355" font-size="20" fill="#62697B">dim</text>
-  <text x="80" y="385" class="muted">primary content</text><text x="300" y="385" class="muted">secondary</text><text x="450" y="385" class="muted">metadata</text><text x="620" y="385" class="muted">low priority</text>
+  <text x="80" y="355" font-size="20" fill="#E6E2D6">content.primary</text>
+  <text x="340" y="355" font-size="20" fill="#C9C8C2">secondary</text>
+  <text x="540" y="355" font-size="20" fill="#9299AE">muted</text>
+  <text x="700" y="355" font-size="20" fill="#62697B">subtle</text>
+  <text x="80" y="385" class="muted">primary content</text><text x="340" y="385" class="muted">secondary</text><text x="540" y="385" class="muted">metadata</text><text x="700" y="385" class="muted">low priority</text>
 
-  <text x="56" y="464" class="section">SEMANTIC ACCENTS</text>
+  <text x="56" y="464" class="section">DOMAINS AND INTERACTION</text>
   <g class="chip">
-    <rect x="56" y="486" width="130" height="54" rx="6" fill="#72EAD5"/><text x="72" y="518" fill="#0F1117">cyan · focus</text>
-    <rect x="200" y="486" width="130" height="54" rx="6" fill="#83BFFF"/><text x="216" y="518" fill="#0F1117">blue · function</text>
-    <rect x="344" y="486" width="130" height="54" rx="6" fill="#C2A7FF"/><text x="360" y="518" fill="#0F1117">purple · keyword</text>
-    <rect x="488" y="486" width="130" height="54" rx="6" fill="#A3D98B"/><text x="504" y="518" fill="#0F1117">green · string</text>
-    <rect x="632" y="486" width="130" height="54" rx="6" fill="#EDD071"/><text x="648" y="518" fill="#0F1117">yellow · type</text>
-    <rect x="776" y="486" width="130" height="54" rx="6" fill="#F3A261"/><text x="792" y="518" fill="#0F1117">orange · number</text>
-    <rect x="920" y="486" width="130" height="54" rx="6" fill="#EF7785"/><text x="936" y="518" fill="#0F1117">red · error</text>
+    <rect x="56" y="486" width="150" height="54" rx="6" fill="#72EAD5"/><text x="72" y="518" fill="#0F1117">focus</text>
+    <rect x="222" y="486" width="150" height="54" rx="6" fill="#83BFFF"/><text x="238" y="518" fill="#0F1117">syntax.function</text>
+    <rect x="388" y="486" width="150" height="54" rx="6" fill="#C2A7FF"/><text x="404" y="518" fill="#0F1117">syntax.keyword</text>
+    <rect x="554" y="486" width="150" height="54" rx="6" fill="#A3D98B"/><text x="570" y="518" fill="#0F1117">syntax.string</text>
+    <rect x="720" y="486" width="150" height="54" rx="6" fill="#EDD071"/><text x="736" y="518" fill="#0F1117">syntax.type</text>
+    <rect x="886" y="486" width="150" height="54" rx="6" fill="#EF7785"/><text x="902" y="518" fill="#0F1117">status.danger</text>
   </g>
 
-  <text x="56" y="598" class="section">STATES</text>
-  <rect x="56" y="620" width="310" height="62" rx="6" fill="#293B2C" stroke="#3A5C3E"/><text x="78" y="657" class="label" fill="#A3D98B">ADDED · success</text>
-  <rect x="390" y="620" width="310" height="62" rx="6" fill="#48262E" stroke="#6B2B38"/><text x="412" y="657" class="label" fill="#EF7785">REMOVED · error</text>
-  <rect x="724" y="620" width="310" height="62" rx="6" fill="#242B3D" stroke="#72EAD5"/><text x="746" y="657" class="label" fill="#72EAD5">FOCUS · interaction</text>
+  <text x="56" y="598" class="section">DIFF DOMAIN</text>
+  <rect x="56" y="620" width="310" height="62" rx="6" fill="#293B2C" stroke="#3A5C3E"/><text x="78" y="657" class="label" fill="#A3D98B">diff.added</text>
+  <rect x="390" y="620" width="310" height="62" rx="6" fill="#48262E" stroke="#6B2B38"/><text x="412" y="657" class="label" fill="#EF7785">diff.removed</text>
+  <rect x="724" y="620" width="310" height="62" rx="6" fill="#242B3D" stroke="#72EAD5"/><text x="746" y="657" class="label" fill="#72EAD5">surface.selection</text>
 </svg>

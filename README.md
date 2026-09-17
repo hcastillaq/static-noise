@@ -12,11 +12,11 @@ El proyecto publica un contrato de tokens. No genera configuraciones para herram
 
 Static Noise se basa en cinco principios:
 
-1. **Profundidad sin negro absoluto.** El lienzo parte de `void` y construye superficies progresivas con `surface` y `card`, evitando que toda la interfaz se convierta en una sola masa negra.
-2. **Foco eléctrico.** `cyan` identifica el cursor, el foco activo y la interacción principal. Es un color de atención, no un relleno decorativo permanente.
+1. **Profundidad sin negro absoluto.** El lienzo parte de `semantic.surface.canvas` y construye superficies progresivas con `semantic.surface.base` y `semantic.surface.elevated`, evitando que toda la interfaz se convierta en una sola masa negra.
+2. **Foco eléctrico.** `semantic.interaction.focus` identifica el cursor, el foco activo y la interacción principal. Es un color de atención, no un relleno decorativo permanente.
 3. **Jerarquía cálida.** El texto principal usa blancos cálidos para reducir la dureza de los fondos fríos y conservar legibilidad prolongada.
 4. **Semántica estable.** Los acentos tienen funciones consistentes: azul para funciones, púrpura para keywords, verde para strings, amarillo para tipos, naranja para constantes y rojo para errores.
-5. **Estructura neutral.** Los bordes y separadores delimitan la interfaz sin competir con el foco. `borderStrong` está reservado para límites estructurales que deben seguir visibles en fondos oscuros o transparentes.
+5. **Estructura neutral.** Los bordes y separadores delimitan la interfaz sin competir con el foco. `semantic.outline.strong` está reservado para límites estructurales que deben seguir visibles en fondos oscuros o transparentes.
 
 La paleta está pensada para personas que pasan muchas horas alternando entre terminales, editores, multiplexores, herramientas Git y asistentes de desarrollo. Su objetivo no es maximizar el número de colores, sino hacer que cada color comunique algo distinto.
 
@@ -32,8 +32,6 @@ La paleta está pensada para personas que pasan muchas horas alternando entre te
 
 Los adaptadores deben mapear los tokens por intención, no por coincidencia superficial de nombres:
 
-| Necesidad visual | Token recomendado |
-| --- | --- |
 | Necesidad visual | Token recomendado |
 | --- | --- |
 | Lienzo o fondo raíz | `semantic.surface.canvas` |
