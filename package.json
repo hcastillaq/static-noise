@@ -1,7 +1,10 @@
 {
   "name": "@hcastillaq/static-noise",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
   "description": "High-contrast dark design system and canonical color token contract",
   "main": "palette.json",
   "exports": {

@@ -1,69 +1,72 @@
 # Identidad visual y contrato de tokens
 
-## Propósito
+Static Noise es una identidad visual oscura, profunda y eléctrica para herramientas de desarrollo. El contrato define relaciones visuales comunes; no define botones, barras, paneles ni configuraciones de una herramienta concreta.
 
-Static Noise fue creada para dar una identidad común a entornos de desarrollo que normalmente se configuran por separado. Terminal, editor, multiplexor, herramienta Git y asistente pueden tener componentes distintos, pero todos necesitan expresar las mismas relaciones: qué es el fondo, qué está elevado, qué tiene foco, qué es estructura y qué representa un estado.
+## Capas del contrato
 
-El contrato no intenta dictar la apariencia exacta de cada herramienta. Define la intención visual que un adaptador debe conservar.
+El contrato sigue cuatro capas:
 
-## Identidad visual
+- `primitives`: valores visuales concretos que forman la identidad.
+- `semantic`: roles transversales como superficie, contenido, outline, interacción y estado.
+- `domains`: conceptos propios del trabajo de desarrollo, como sintaxis y diff.
+- `projections`: representaciones de compatibilidad, actualmente ANSI.
 
-Static Noise es oscura, profunda y eléctrica, pero no está construida alrededor del negro puro. `void`, `surface` y `card` crean una progresión de profundidad para que un panel pueda diferenciarse del lienzo sin recurrir a bordes pesados.
+Los tokens siguen el formato DTCG: cada token tiene `$type`, `$value` y `$description`. Un `$value` puede ser un color hexadecimal o una referencia como `{primitives.accent.cyan}`.
 
-El texto usa blancos cálidos y grises azulados. Los acentos son pastel eléctricos: suficientemente luminosos para destacar sobre superficies oscuras, pero asignados a funciones concretas para evitar una interfaz multicolor sin jerarquía.
+## Propósito visual
 
-El cyan representa atención inmediata. Los demás acentos representan categorías semánticas. Los bordes son neutrales y existen para explicar estructura, no para competir con el foco.
+Static Noise evita el negro absoluto y construye profundidad con `void`, `surface` y `elevated`. El texto usa blancos cálidos y grises azulados para mantener una lectura prolongada. Los acentos son eléctricos, pero cada uno tiene una función estable para evitar una interfaz multicolor sin jerarquía.
 
-La paleta está diseñada para uso prolongado en herramientas de desarrollo. Prioriza reconocimiento rápido, separación entre estados y consistencia entre superficies antes que saturación o decoración.
+- `cyan` concentra la atención: foco, cursor e interacción activa.
+- `blue` expresa comportamiento: funciones, llamadas y métodos.
+- `purple` expresa estructura del código: keywords y modificadores.
+- `green` expresa texto y resultados positivos: strings, literales y éxito.
+- `yellow` expresa clasificación y atención: tipos y advertencias.
+- `orange` expresa valores: constantes, números y booleanos.
+- `red` expresa fallo o eliminación: errores, peligro y contenido removido.
+- `magenta` es un acento secundario para preprocesamiento y diferenciación.
 
-## Modelo de profundidad
+Estos significados son parte de la identidad, no nombres de componentes. Un adaptador puede representar una función de otra manera si su herramienta lo exige, pero debe conservar la intención de `domains.syntax.function`.
 
-| Nivel | Token | Uso |
-| --- | --- | --- |
-| Lienzo | `colors.base.void` | Fondo raíz o área que puede heredar transparencia del terminal. |
-| Superficie | `colors.base.surface` | Área principal de una aplicación o panel estable. |
-| Elevación | `colors.base.card` | Tarjetas, menús, popups, powerbars y elementos que deben separarse del lienzo. |
-| Elevación activa | `colors.base.cardHover` | Estado elevado bajo interacción o hover. |
+## Cómo usar las capas
 
-Un adaptador puede omitir un nivel cuando la herramienta no permite fondos separados. En ese caso debe conservar la jerarquía mediante bordes y texto, no inventar un color nuevo.
+### Primitives
 
-## Modelo semántico
+Usa `primitives` cuando necesites conocer el valor visual de la identidad o construir una referencia semántica. No uses un primitive directamente si ya existe un rol semántico equivalente.
 
-### Estructura y foco
+### Semantic
 
-- `colors.base.border`: delimitador sutil.
-- `colors.base.borderStrong`: límite estructural, separador principal o borde de pane.
-- `colors.accents.cyan`: cursor, foco activo, selección de acción e interacción principal.
-- `colors.base.selection`: selección neutral que no implica foco activo.
+Usa `semantic` para superficies y relaciones generales:
 
-`borderStrong` y `cyan` tienen funciones diferentes. El primero explica la estructura permanente; el segundo indica dónde está la atención del usuario.
+- `semantic.surface.canvas`: lienzo raíz.
+- `semantic.surface.base`: superficie principal.
+- `semantic.surface.elevated`: panel o contenedor elevado.
+- `semantic.content.primary`, `secondary`, `muted`, `subtle`: jerarquía de texto.
+- `semantic.outline.subtle` y `strong`: separación estructural.
+- `semantic.interaction.focus`: atención activa.
+- `semantic.status.success`, `warning`, `danger`: estados comunes.
 
-### Texto
+`onX` solo aparece cuando el contrato necesita declarar el contenido sobre un fondo estable. No se crean pares por simetría para todos los colores.
 
-- `colors.text.foreground`: texto principal y contenido que debe leerse sin esfuerzo.
-- `colors.text.soft`: texto secundario con presencia normal.
-- `colors.text.muted`: etiquetas, metadatos y contenido auxiliar.
-- `colors.text.dim`: comentarios, estados inactivos y detalles de baja prioridad.
+### Domains
 
-### Sintaxis y estados
+`domains.syntax` y `domains.diff` son conceptos compartidos por herramientas de desarrollo, no tokens de Neovim, VS Code o cualquier producto concreto.
 
-- `blue`: funciones, llamadas y métodos.
-- `purple`: keywords, modificadores y almacenamiento.
-- `green`: strings y literales de texto.
-- `yellow`: tipos, clases e interfaces.
-- `orange`: constantes, números y booleanos.
-- `red`: errores, alertas y elementos eliminados.
-- `magenta`: preprocesamiento y acento adicional.
+- `domains.syntax.function`, `keyword`, `string`, `type`, `constant`, `preprocessor`, `error`.
+- `domains.diff.added`, `addedEmphasis`, `removed`, `removedEmphasis`.
 
-Las variantes en `colors.dim` reducen la intensidad sin cambiar el significado. `colors.diff` expresa cambios añadidos y eliminados; no sustituye los colores semánticos de sintaxis.
+### Projections
 
-## Reglas para adaptadores
+`projections.ansi` es una traducción de compatibilidad. No es la fuente de la identidad ni debe utilizarse para inferir el significado de los primitives.
 
-1. Mapear por intención visual, no por nombre de componente.
-2. Mantener `cyan` para foco e interacción, no para todos los elementos activos o estructurales.
-3. Usar `borderStrong` para estructura que debe seguir visible en fondos oscuros o transparentes.
-4. Mantener el contraste y la jerarquía aunque la herramienta no soporte todas las superficies.
-5. No agregar colores hexadecimales locales al adaptador sin una necesidad semántica documentada.
-6. Tratar cualquier token no reconocido como una incompatibilidad del contrato, no como permiso para adivinar un reemplazo.
+## Reglas de diseño
 
-La estructura formal se valida con `schemas/palette.schema.json`. Las invariantes semánticas se prueban con `npm test`.
+1. Nombrar por intención visual, no por color de herramienta o componente.
+2. Añadir un token solo si su significado es común a varios consumidores.
+3. Preferir referencias a primitives antes que duplicar hexadecimales.
+4. Mantener el foco separado de la estructura: `interaction.focus` no reemplaza `outline.strong`.
+5. No crear tokens para botones, barras, tabs, paneles, sidebars o plugins.
+6. No usar color como único indicador de estado cuando el adaptador pueda añadir texto, forma o iconografía.
+7. Documentar y probar cualquier nuevo rol, referencia o par de contraste.
+
+El schema está en `schemas/palette.schema.json` y la suite del contrato se divide por propósito en `test/schema.test.mjs`, `test/semantics.test.mjs` y `test/accessibility.test.mjs`.
